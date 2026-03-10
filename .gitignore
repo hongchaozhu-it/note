@@ -1,0 +1,17 @@
+# idea
+.idea/
+*.iml
+
+# vscode
+.vscode/
+
+# java
+target/
+*.class
+*.jar
+
+# git
+.git/
+
+# macos
+.DS_Store
