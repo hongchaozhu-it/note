@@ -410,5 +410,13 @@ package com.zhc.query;
 public class ${table.entityName}Query extends BaseQuery{
 }
 ```
+### 执行代码
+
+允许 GeneratorCode 类,一次性生成所有模块的代码,检查生成结果是否符合预期
+- model
+- controller
+- service
+- mapper
+- xml
 
 配置文件和模板文件可以到 [docs/project/xuebay/resources](https://github.com/hongchaozhu-it/note/blob/main/docs/project/xuebay/resources) 下获取。
