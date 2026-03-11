@@ -19,8 +19,11 @@ unzip nacos-server-2.5.2.zip
 tar -xvf nacos-server-2.5.2.tar.gz
 
 ```
+
 ## 启用 Nacos 鉴权
+
 [鉴权配置请参考官网-点我直达](https://nacos.io/docs/v2/guide/user/auth/)
+
 - Mac
 
 ```shell
@@ -40,6 +43,7 @@ sed -i '' "s|^nacos.core.auth.plugin.nacos.token.secret.key=.*|nacos.core.auth.p
 ```
 
 - Linux/Unix
+
 ```shell
 cd ${nacos.home}
 FILE_PATH="conf/application.properties"
@@ -57,14 +61,13 @@ sed -i "s|^nacos.core.auth.plugin.nacos.token.secret.key=.*|nacos.core.auth.plug
 ```
 
 - Windows
+
 由于 Windows 终端不支持 `sed` 命令，因此需要手动修改 `application.properties` 文件。
+
 ```properties
 nacos.core.auth.system.type=nacos
-
 nacos.core.auth.enabled=true
-
 nacos.core.auth.server.identity.key=${nacos_username}
-
 nacos.core.auth.server.identity.value=${nacos_password}
 # 这个密钥需要足够长
 nacos.core.auth.plugin.nacos.token.secret.key=${your_secret_key}
