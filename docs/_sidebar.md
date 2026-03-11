@@ -6,3 +6,4 @@
         * [项目基本介绍](./project/xuebay/xuebay01-项目基本介绍.md)
         * [项目后端搭建](./project/xuebay/xuebay02-项目后端搭建.md)
         * [集成Gateway网关](./project/xuebay/xuebay03-集成Gateway网关.md)
+        * [服务搭建](./project/xuebay/xuebay04-服务搭建.md)
