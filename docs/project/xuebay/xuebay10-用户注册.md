@@ -3,20 +3,20 @@
 ## 数据库设计
 
 ```text
-├── xuebay-uaa      			      //认证中心数据库 
+├── xuebay-uaa      		  //认证中心数据库 
 │       └── t_login           ：公共的登录表，主要保存登录信息
 │       └── t_login_role      ：用户和角色关系表
 │       └── t_role            ：角色表
 │       └── t_role_permission ：角色权限关系表
 │       └── t_permission      ：权限表
 │       └── t_menu            ：菜单表
-├── xuebay-system         		  //管理系统数据库
+├── xuebay-system         	  //管理系统数据库
 │       └── t_employee        ：后台用户表 ，和t_login 关联一对一， 保存后台用户特有的字段
 │       └── t_department      ：部门表
-├── xuebay-user           			//用户数据库
+├── xuebay-user           	  //用户数据库
 │       └── t_user        	  ：前台用户表 ，和t_login 关联一对一 ，保存前台用户特有的字段
 │       └── t_user_base_info  ：前台用户基本信息表,和t_user 关联一对一 
-│       └── t_user_account 		：前台用户账户表,和t_user 关联一对一 
+│       └── t_user_account 	  ：前台用户账户表,和t_user 关联一对一 
 ```
 
 数据库关系如下
@@ -197,62 +197,7 @@ public JSONResult register(@RequestBody Login login) {
 
 ## 时序图
 
-```mermaid
-sequenceDiagram
-    participant Client as 客户端
-    participant Gateway as API Gateway (10010)
-    participant UserService as User Service (10050)
-    participant Redis as Redis Cache
-    participant MySQL as MySQL DB
-    participant UAAService as UAA Service (认证服务)
-    
-    Client->>Gateway: POST /xuebay/user/user/register
-    Gateway->>UserService: 路由转发
-    
-    Note over UserService: 开启分布式事务 GlobalTransactional
-    
-    rect rgb(240, 248, 255)
-        Note right of UserService: 步骤1: 验证短信验证码
-        UserService->>Redis: getCacheMap(varify_code:手机号)
-        Redis-->>UserService: 返回验证码Map
-        alt 验证码不存在
-            UserService-->>Client: 验证码已过期
-        else 验证码错误
-            UserService-->>Client: 验证码错误
-        else 验证成功
-            UserService->>Redis: deleteObject(varify_code:手机号)
-        end
-    end
-    
-    rect rgb(255, 250, 240)
-        Note right of UserService: 步骤2: 验证重复注册
-        UserService->>MySQL: SELECT * FROM t_user WHERE phone=?
-        MySQL-->>UserService: 返回查询结果
-        alt 用户已存在
-            UserService-->>Client: 当前手机号已注册
-        end
-    end
-    
-    rect rgb(240, 255, 240)
-        Note right of UserService: 步骤3: 执行注册
-        UserService->>UserService: 生成雪花ID
-        
-        UserService->>MySQL: INSERT INTO t_user
-        MySQL-->>UserService: 插入成功
-        
-        UserService->>MySQL: INSERT INTO t_user_account
-        MySQL-->>UserService: 插入成功
-        
-        UserService->>UAAService: POST /login/register (OpenFeign)
-        UAAService->>MySQL: INSERT INTO t_login
-        MySQL-->>UAAService: 插入成功
-        UAAService-->>UserService: 返回成功
-    end
-    
-    Note over UserService: Seata提交分布式事务
-    UserService-->>Gateway: 返回成功
-    Gateway-->>Client: 注册成功
-```
+![1773214833.png](../../images/1773214833.png)
 
 ## Redis缓存结构
 
@@ -297,40 +242,7 @@ UserController.register() [@GlobalTransactional]
 
 ### 事务协调流程
 
-```mermaid
-sequenceDiagram
-    participant TM as Transaction Manager (UserController)
-    participant TC as Transaction Coordinator (Seata Server)
-    participant RM1 as Resource Manager 1 (User Service DB)
-    participant RM2 as Resource Manager 2 (UAA Service DB)
-    
-    TM->>TC: 开始全局事务 (XID)
-    TC-->>TM: 返回全局事务ID
-    
-    TM->>RM1: 执行本地事务 (t_user, t_user_account)
-    RM1->>TC: 注册分支事务 (Branch ID 1)
-    RM1->>RM1: 记录undo_log
-    RM1->>RM1: 提交本地事务
-    RM1-->>TM: 返回成功
-    
-    TM->>RM2: 远程调用 (t_login)
-    RM2->>TC: 注册分支事务 (Branch ID 2)
-    RM2->>RM2: 记录undo_log
-    RM2->>RM2: 提交本地事务
-    RM2-->>TM: 返回成功
-    
-    alt 所有分支成功
-        TM->>TC: 提交全局事务
-        TC->>RM1: 删除undo_log
-        TC->>RM2: 删除undo_log
-        TC-->>TM: 全局提交成功
-    else 任一分支失败
-        TM->>TC: 回滚全局事务
-        TC->>RM1: 执行undo_log回滚
-        TC->>RM2: 执行undo_log回滚
-        TC-->>TM: 全局回滚成功
-    end
-```
+![1773214923.png](../../images/1773214923.png)
 
 ### 补偿机制
 
