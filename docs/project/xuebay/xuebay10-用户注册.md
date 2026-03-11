@@ -209,10 +209,10 @@ sequenceDiagram
     Client->>Gateway: POST /xuebay/user/user/register
     Gateway->>UserService: 路由转发
     
-    Note over UserService: @GlobalTransactional 开启分布式事务
+    Note over UserService: "@GlobalTransactional" 开启分布式事务
     
     rect rgb(240, 248, 255)
-        Note right of UserService: 步骤1: 验证短信验证码
+        Note right of UserService: "步骤1: 验证短信验证码"
         UserService->>Redis: getCacheMap("varify_code:手机号")
         Redis-->>UserService: 返回验证码Map
         alt 验证码不存在
@@ -225,7 +225,7 @@ sequenceDiagram
     end
     
     rect rgb(255, 250, 240)
-        Note right of UserService: 步骤2: 验证重复注册
+        Note right of UserService: "步骤2: 验证重复注册"
         UserService->>MySQL: SELECT * FROM t_user WHERE phone=?
         MySQL-->>UserService: 返回查询结果
         alt 用户已存在
@@ -234,7 +234,7 @@ sequenceDiagram
     end
     
     rect rgb(240, 255, 240)
-        Note right of UserService: 步骤3: 执行注册
+        Note right of UserService: "步骤3: 执行注册"
         UserService->>UserService: 生成雪花ID
         
         UserService->>MySQL: INSERT INTO t_user
@@ -249,7 +249,7 @@ sequenceDiagram
         UAAService-->>UserService: 返回成功
     end
     
-    Note over UserService: Seata提交分布式事务
+    Note over UserService: "Seata提交分布式事务"
     UserService-->>Gateway: 返回成功
     Gateway-->>Client: 注册成功
 ```
