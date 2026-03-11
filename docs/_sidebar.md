@@ -11,3 +11,4 @@
         * [集成Swagger](project/xuebay/xuebay06-集成Swagger.md)
         * [启动后台前端](project/xuebay/xuebay07-启动后台前端.md)
         * [全局异常处理](project/xuebay/xuebay08-全局异常处理.md)
+        * [集成JSR303](project/xuebay/xuebay09-集成JSR303.md)

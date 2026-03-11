@@ -24,7 +24,6 @@ public class BusinessException extends RuntimeException{
         this.message = msg;
     }
 }
-
 ```
 
 
