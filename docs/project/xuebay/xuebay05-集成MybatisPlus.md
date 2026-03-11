@@ -33,6 +33,8 @@ public class MybatisPlusConfig {
 }
 ```
 
+其他服务按此模板添加配置类即可集成MybatisPlus。
+
 ## MybatisPlus代码生成器
 
 ### 引入依赖
