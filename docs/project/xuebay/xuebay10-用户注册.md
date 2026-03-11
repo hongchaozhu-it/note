@@ -200,32 +200,32 @@ public JSONResult register(@RequestBody Login login) {
 ```mermaid
 sequenceDiagram
     participant Client as 客户端
-    participant Gateway as API Gateway<br/>(10010)
-    participant UserService as User Service<br/>(10050)
+    participant Gateway as API Gateway (10010)
+    participant UserService as User Service (10050)
     participant Redis as Redis Cache
     participant MySQL as MySQL DB
-    participant UAAService as UAA Service<br/>(认证服务)
+    participant UAAService as UAA Service (认证服务)
     
     Client->>Gateway: POST /xuebay/user/user/register
     Gateway->>UserService: 路由转发
     
-    Note over UserService: "@GlobalTransactional" 开启分布式事务
+    Note over UserService: @GlobalTransactional 开启分布式事务
     
     rect rgb(240, 248, 255)
-        Note right of UserService: "步骤1: 验证短信验证码"
-        UserService->>Redis: getCacheMap("varify_code:手机号")
+        Note right of UserService: 步骤1: 验证短信验证码
+        UserService->>Redis: getCacheMap(varify_code:手机号)
         Redis-->>UserService: 返回验证码Map
         alt 验证码不存在
             UserService-->>Client: 验证码已过期
         else 验证码错误
             UserService-->>Client: 验证码错误
         else 验证成功
-            UserService->>Redis: deleteObject("varify_code:手机号")
+            UserService->>Redis: deleteObject(varify_code:手机号)
         end
     end
     
     rect rgb(255, 250, 240)
-        Note right of UserService: "步骤2: 验证重复注册"
+        Note right of UserService: 步骤2: 验证重复注册
         UserService->>MySQL: SELECT * FROM t_user WHERE phone=?
         MySQL-->>UserService: 返回查询结果
         alt 用户已存在
@@ -234,7 +234,7 @@ sequenceDiagram
     end
     
     rect rgb(240, 255, 240)
-        Note right of UserService: "步骤3: 执行注册"
+        Note right of UserService: 步骤3: 执行注册
         UserService->>UserService: 生成雪花ID
         
         UserService->>MySQL: INSERT INTO t_user
@@ -249,7 +249,7 @@ sequenceDiagram
         UAAService-->>UserService: 返回成功
     end
     
-    Note over UserService: "Seata提交分布式事务"
+    Note over UserService: Seata提交分布式事务
     UserService-->>Gateway: 返回成功
     Gateway-->>Client: 注册成功
 ```
@@ -299,10 +299,10 @@ UserController.register() [@GlobalTransactional]
 
 ```mermaid
 sequenceDiagram
-    participant TM as Transaction Manager<br/>(UserController)
-    participant TC as Transaction Coordinator<br/>(Seata Server)
-    participant RM1 as Resource Manager 1<br/>(User Service DB)
-    participant RM2 as Resource Manager 2<br/>(UAA Service DB)
+    participant TM as Transaction Manager (UserController)
+    participant TC as Transaction Coordinator (Seata Server)
+    participant RM1 as Resource Manager 1 (User Service DB)
+    participant RM2 as Resource Manager 2 (UAA Service DB)
     
     TM->>TC: 开始全局事务 (XID)
     TC-->>TM: 返回全局事务ID
