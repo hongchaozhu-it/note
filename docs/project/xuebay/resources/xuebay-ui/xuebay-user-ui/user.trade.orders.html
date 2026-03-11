@@ -1,0 +1,808 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if IE 8]> <html lang="zh-CN" class="ie8"> <![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<html lang="zh-CN">
+
+	<head><link rel="shortcut icon" href="https://www.itsource.cn/img/logo_small.jpg">
+		<meta charset="utf-8" />
+		<title>用户中心</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+		<link type="text/css" rel="stylesheet" href="css/common.css" />
+		<link type="text/css" rel="stylesheet" href="css/user.css" />
+		<link type="text/css" rel="stylesheet" href="css/color-style.css" />
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/layer.js"></script>
+		<script type="text/javascript" src="js/jquery.method.js"></script>
+		<script type="text/javascript" src="js/jquery.modal.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/jquery.tablelist.js"></script>
+		<script type="text/javascript" src="js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="js/common1.js"></script>
+		<script type="text/javascript" src="js/user.js"></script>
+
+		<script type="text/javascript" src="js/plugins/vue/dist/vue.js"></script>
+		<script type="text/javascript" src="js/plugins/axios/dist/axios.js"></script>
+		<script type="text/javascript" src="js/axios.common.js"></script>
+		<link rel="stylesheet" href="js/jqueryAlert/alert.css">
+		<script src="js/jqueryAlert/alert.js"></script>
+	</head>
+
+	<body>
+	<div id="myBody">
+		<div >
+		<div id="nav" class="bg-color">
+			<div class="nav-content w1210">
+				<div class="logo-info">
+					<a href="/" target="_blank" class="logo fore1">
+						<img src="css/mall_logo_0_white.png" style="margin-top: 10px;" />
+					</a>
+					<div class="user-link">
+						<a href="/user.html" target="_self" class="fore2">我是云课</a>
+						<a href="http://course.ymcc.com:6002/list.html" target="_blank" class="fore3">我要去选课</a>
+					</div>
+				</div>
+				<div class="navitems">
+					<ul>
+						<li class="fore-1">
+							<a href="/user.html" target="_self" href="">首页</a>
+						</li>
+						<li class="fore-3">
+							<div class="dl">
+								<div class="dt">
+									<span>账户设置</span>
+									<b></b>
+								</div>
+								<div class="dd">
+									<a href="/user.my.profile.html" target="_self">
+										<span>个人资料</span>
+									</a>
+									<a href="/user.my.account.secret.html" target="_self">
+										<span>账户安全</span>
+									</a>
+									<a href="/user.home.html" target="_self">
+										<span>账号绑定</span>
+									</a>
+									<a href="/user.my.address.html" target="_self">
+										<span>收货地址</span>
+									</a>
+								</div>
+							</div>
+						</li>
+						<li class="fore-4">
+							<a href="/user/message/internal.html">
+								消息
+
+							</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+		</div>
+
+		<div id="content">
+			<div class="content w1210 clearfix">
+				<!-- 引入左侧导航条文件 -->
+				<!-- 引入左侧导航条文件 -->
+				<div class="con-left fl">
+					<div class="nav-list">
+						<div class="func func1">
+							<p class="title">
+								<i></i>
+								<span>会员中心</span>
+							</p>
+							<a href="user.home.html" class="item curs">
+								<span>欢迎页</span>
+								<i></i>
+							</a>
+							<a href="/user.my.profile.html" class="item ">
+								<span>个人资料</span>
+								<i></i>
+							</a>
+							<a href="/user.my.account.secret.html" class="item ">
+								<span>账户安全</span>
+								<i></i>
+							</a>
+
+							<!--							<a href="/user.my.address.html" class="item ">-->
+							<!--								<span>收货地址</span>-->
+							<!--								<i></i>-->
+							<!--							</a>-->
+							<a href="/user.my.msg.html" class="item ">
+								<span>我的消息</span>
+								<i></i>
+							</a>
+							<a href="/user.my.growth.html" class="item ">
+								<span>我的成长值</span>
+								<i></i>
+							</a>
+						</div>
+						<div class="func func2">
+							<p class="title">
+								<i></i>
+								<span>交易中心</span>
+							</p>
+							<a href="/user.trade.orders.html" class="item ">
+								<span>我的订单</span>
+								<i></i>
+							</a>
+							<a href="/user.trade.comment.html" class="item ">
+								<span>我的评价</span>
+								<i></i>
+							</a>
+							<!-- <a href="/user/replace.html" class="item">
+				<span>换货维修</span>
+				<i></i>
+			</a> -->
+							<a href="/user.trade.complaint.html" class="item ">
+								<span>我的投诉</span>
+								<i></i>
+							</a>
+							<a href="/user.trade.collect.html" class="item ">
+								<span>我的收藏</span>
+								<i></i>
+							</a>
+							<!-- <a href="" class="item"><span>我的二手</span><i></i></a> -->
+						</div>
+						<div class="func func3">
+							<p class="title">
+								<i></i>
+								<span>资金中心</span>
+							</p>
+							<a href="/user.account.home.html" class="item ">
+								<span>我的资金账户</span>
+								<i></i>
+							</a>
+							<a href="/user.account.recharge.html" class="item  ">
+								<span>我的充值</span>
+								<i></i>
+							</a>
+							<a href="/user.account.points.html" class="item">
+								<span>我的积分</span>
+								<i></i>
+							</a>
+							<a href="/user.account.coupon.html" class="item ">
+								<span>我的优惠券</span>
+								<i></i>
+							</a>
+						</div>
+						<div class="func func4">
+							<p class="title">
+								<i></i>
+								<span>服务中心</span>
+							</p>
+							<a href="#" class="item" target="_blank">
+								<span>操作帮助</span>
+								<i></i>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- 正文，由view提供 -->
+
+				<div class="con-right fr">
+					<!-- 倒计时 -->
+					<script type="text/javascript" src="js/jquery.countdown.js"></script>
+					<div class="con-right-text">
+						<div class="tabmenu">
+							<div class="user-status">
+								<span class="user-statu active">
+								<a id="order_all" class="tabs- color">
+									<span>所有订单</span>
+									<em class="tag-em">2</em>
+									<span class="vertical-line">|</span>
+								</a>
+								</span>
+								<span class="user-statu">
+								<a id="order_unpayed" class="tabs-">
+									<span>待付款</span>
+												<em class="tag-em">1</em>
+												<span class="vertical-line">|</span>
+								</a>
+								</span>
+								<span class="user-statu">
+								<a id="order_unshipped" class="tabs-">
+									<span>已完成</span>
+												<em class="tag-em">0</em>
+												<span class="vertical-line">|</span>
+								</a>
+								</span>
+								
+							</div>
+							<div class="user-tab-right">
+								<a href="http://user.ymcc.com/user/order/list.html?is_delete=1">订单回收站</a>
+							</div>
+						</div>
+						
+						
+						<div class="content-info">
+							<div class="content-list order-list">
+								
+								
+								<form id="searchForm" name="searchForm" action="http://user.ymcc.com/user/order.html" method="GET">
+									<div class="content-search order-search"></div>
+									<div class="order-screen-term">
+										<label style="width: 30%;">
+											<span>课程标题/订单号：</span>
+											<input type="text" id="name" class="form-control" name="name" placeholder="输入课程标题或订单号">
+										</label>
+										<label style="width: 30%;">
+											<span>交易状态：</span>
+											<span class="select">
+												<select id="order_status" class="form-control" name="order_status">
+												<option value="">全部</option>
+												<option value="unpayed">等待买家付款</option>
+												<option value="unshipped">等待卖家发货</option>
+												<option value="shipped">卖家已发货</option>
+												<option value="finished">交易成功</option>
+												<option value="closed">交易关闭</option>
+												<option value="backing">退款中的订单</option>
+												</select>
+											</span>
+										</label>
+										<label style="width: 30%;">
+											<span>购买时间：</span>
+											<span class="select">
+												<select id="order_time" class="form-control" name="order_time">
+												<option value="">全部</option>
+												<option value="ThreeMonth">近三个月订单</option>
+												<option value="ThisYear">今年内订单</option>
+												<option value="OneYear">2016年订单</option>
+												<option value="TwoYear">2015年订单</option>
+												<option value="ThreeYear">2014年订单</option>
+												<option value="OldYear">2014年以前订单</option>
+												</select>
+											</span>
+										</label>
+										<label style="display: none">
+											<span>评价状态：</span>
+											<span class="select">
+												<select id="evaluate_status" class="form-control" name="evaluate_status">
+												<option value="">全部</option>
+												<option value="unevaluate">待评价</option>
+												<option value="evaluate">已评价</option>
+												</select>
+											</span>
+										</label>
+										<label style="width: 10%;">
+											<input type="submit" value="搜索" class="search" id="searchFormSubmit">
+										</label>
+									</div>
+								</form>
+
+								<div id="table_list">
+									<table class="table" >
+										<colgroup>
+											<col style="width: 40%;">
+											<col style="width: 15%;">
+											<col style="width: 15%;">
+											<col style="width: 12%;">
+											<col style="width: 21%;">
+										</colgroup>
+										<thead>
+											<tr>
+												<th>课程</th>
+												<th class="" style="cursor: default;">金额（元）</th>
+												<th>支付类型</th>
+												<th class="" style="cursor: default;">支付状态</th>
+												<th class="" style="cursor: default;">交易操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th colspan="7">
+													<div class="fl">
+														<label class="input-label">
+										<input class="checkBox table-list-checkbox-all" type="checkbox" title="全选/全不选">
+										全选
+									</label>
+														<button class="btn-default" type="button" onclick="order_deletes(1)">批量删除订单</button>
+													</div>
+												</th>
+											</tr>
+										</tbody>
+									</table>
+									<div class="trade-order" v-for="data in datas">
+										<table class="trade-order-goods" >
+											<colgroup>
+												<col style="width: 40%;">
+												<col style="width: 15%;">
+												<col style="width: 15%;">
+												<col style="width: 12%;">
+												<col style="width: 21%;">
+											</colgroup>
+											<tbody>
+												<tr class="trade-order-info" style="border-bottom: 1px solid #eeeeee">
+													<td colspan="2">
+														<label>
+															<input type="checkbox" name="order_delete" value="1080" class="table-list-checkbox">
+															<span style="">{{data.createTime}}</span>
+														</label>
+														<span>订单号：</span>
+														<span>{{data.orderNo}}</span>
+
+													</td>
+													<td colspan="2">
+														<span class="shop-logo">
+															<img src="img/shop-icon2.png">
+														</span>
+														<a href="http://user.ymcc.com/shop/6" title="IT云课堂IT云课堂"
+														   style="overflow: visible"
+														   target="_blank" class="shop-name">{{data.title}}</a>
+
+													</td>
+													<td class="order-recycle-bin">
+														<a href="javascript:;" class="ww-light service-online service-btn" data-shop_id="6">
+															<img src="img/test/openim.png" width="20" height="20" border="0" alt="在线客服">&nbsp;客服
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td class="goods-info" >
+														<div style="overflow: hidden;margin: 2px;padding: 2px" v-for="item in data.items">
+															<a class="goods-img" href="http://user.ymcc.com/5790" target="_blank">
+																<img :src="item.coursePic">
+															</a>
+															<div class="item-con">
+																<div class="item-name">
+																	<a :href="'http://course.ymcc.com:6002/detail.html?courseId='+item.courseId" target="_blank">
+																		<span>{{item.courseName}}</span>
+																	</a>
+																	<p style="margin-top: 10px;font-size: 12px;color: #c1c1c1">购买数量：{{item.count}}</p>
+																</div>
+															</div>
+														</div>
+													</td>
+													<td class="goods-price" style="color: indianred;border-right: 1px #E8E8E8 solid;border-left: 1px #E8E8E8 solid;">
+														<p>¥ {{data.totalAmount}} 元</p>
+													</td>
+													<td class="goods-payment" style="padding: 20px 0px;border-right: 1px #E8E8E8 solid;" >
+														<p>
+															<span>支付宝支付</span>
+														</p>
+													</td>
+													<td class="trading-status" rowspan="2">
+														<div class="operate">
+
+															<a v-if="data.statusOrder == 0" target="_blank">未付款</a>
+															<a v-if="data.statusOrder == 1" target="_blank">已付款</a>
+															<a v-if="data.statusOrder == 2" target="_blank">已取消</a>
+															<a v-if="data.statusOrder == 3" target="_blank">支付失败</a>
+															<a v-if="data.statusOrder == 4" target="_blank">支付超时</a>
+
+														</div>
+
+													</td>
+
+													<td class="trading-operate" rowspan="2">
+
+														<div class="operate">
+															<p class="confirm-receipt-time" v-if="data.statusOrder == 0">
+																还剩
+																<span id="counter_1080">06 天 23 小时 55 分 00 秒</span>
+															</p>
+															<a :href="'http://127.0.0.1:6002/order.confirm.html?courseId='+data.courseId"
+															   target="_blank" class="on-payment" v-if="data.statusOrder == 0">立即付款</a>
+														</div>
+														<script type="text/javascript">
+															$(document).ready(function() {
+																$("#counter_1080").countdown({
+																	date: "02/15/2017 16:40:24",
+																	onChange: function(event, timer) {},
+																	onComplete: function(event) {
+																		$(this).html("已超时！");
+																		// 超时事件，预留
+																		$.ajax({
+																			type: 'GET',
+																			url: '/user/order/cancel-sys',
+																			data: {
+																				order_id: 1080
+																			},
+																			dataType: 'json',
+																			success: function(data) {
+																				if(data.code == 0) {
+																					tablelist.load();
+																				}
+																			}
+																		});
+																	},
+																	leadingZero: true
+																});
+
+															});
+														</script>
+
+														<div class="operate">
+															<a class="cancel-payment edit-order" data-id="1080" data-type="cancel" v-if="data.statusOrder == 0">取消订单</a>
+														</div>
+
+														<div class="operate">
+															<a href="#">订单详情</a>
+														</div>
+													</td>
+
+												</tr>
+												<!-- 课程自带赠品 -->
+
+
+											</tbody>
+										</table>
+									</div>
+
+									<!--分页-->
+									<div class="page">
+										<div class="page-wrap fr">
+											<div id="pagination" class="pull-right page-box">
+
+												<div id="pagination" class="page">
+													<script data-page-json="true" type="text">
+														{"page_key":"page","page_id":"pagination","default_page_size":15,"cur_page":1,"page_size":10,"page_size_list":[1,10,20,30,50],"record_count":2,"page_count":1,"offset":0,"url":null,"sql":null}
+													</script>
+													<div class="page-wrap fr">
+														<div class="total">共2条记录</div>
+													</div>
+													<div class="page-num fr">
+														<span class="num prev disabled" style="display: none;">
+			<a class="fa fa-angle-double-left" data-go-page="1" title="第一页"></a>
+		</span>
+
+														<span>
+			<a class="num prev disabled " title="上一页">上一页</a>
+		</span>
+
+														<!--   -->
+
+														<span class="num curr">
+			<a data-cur-page="1">1</a>
+		</span>
+
+														<span class="disabled" style="display: none;">
+			<a class="num " data-go-page="1" title="最后一页"></a>
+		</span>
+
+														<span>
+			<a class="num next disabled" title="下一页">下一页</a>
+		</span>
+
+													</div>
+													
+													<script type="text/javascript">
+														$().ready(function() {
+															$(".pagination-goto > .goto-input").keyup(function(e) {
+																$(".pagination-goto > .goto-link").attr("data-go-page", $(this).val());
+																if(e.keyCode == 13) {
+																	$(".pagination-goto > .goto-link").click();
+																}
+															});
+															$(".pagination-goto > .goto-button").click(function() {
+																var page = $(".pagination-goto > .goto-link").attr("data-go-page");
+																if($.trim(page) == '') {
+																	return false;
+																}
+																$(".pagination-goto > .goto-link").attr("data-go-page", page);
+																$(".pagination-goto > .goto-link").click();
+																return false;
+															});
+														});
+													</script>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+
+							<div class="operat-tips">
+								<h4>订单注意事项</h4>
+								<ul class="operat-panel">
+									<li>
+										<span>下单后订单会为您保留168小时，如168小时内未付款，系统将自动取消您的订单</span>
+									</li>
+
+									<li>
+										<span>如买家下单后长时间未付款，卖家将有可能关闭您的订单</span>
+									</li>
+									<li>
+										<span>卖家发货后，“确认收货”倒计时自动开启，到期系统将自动确认收货，您可在小于三天时手动“延长收货时间”</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<script>
+						$().ready(function() {
+							$("body").on("click", ".edit-order", function() {
+								var type = $(this).data("type");
+								var id = $(this).data("id");
+
+								title = '';
+								if(type == 'delay') {
+									title = "延长确认收货时间";
+								}
+								if(type == 'confirm') {
+									title = "确认收货";
+								}
+								if(type == 'cancel') {
+									title = "取消订单";
+								}
+
+								if($.modal($(this))) {
+									$.modal($(this)).show();
+								} else {
+									$.modal({
+										// 标题  
+										title: title,
+										trigger: $(this),
+										// ajax加载的设置  
+										ajax: {
+											url: '/user/order/edit-order?from=list',
+											data: {
+												type: type,
+												id: id
+											}
+										},
+									});
+								}
+
+							});
+
+						});
+					</script>
+
+					<script type="text/javascript">
+						var tablelist = null;
+						$().ready(function() {
+
+							tablelist = $("#table_list").tablelist({
+								params: $("#searchForm").serializeJson(),
+								callback: function() {
+									$.loading.stop();
+
+									if($(".con-right").height() != $(".con-left").height()) {
+										$(".con-left").height($(".con-right").height());
+									}
+								}
+							});
+
+							$("#searchForm").submit(function() {
+								$.loading.start();
+
+								// 控制下方快速选择tab样式
+								if($("#order_status").val() != '') {
+									$("a[class^='tabs-']").removeClass('color');
+									$("a[id='order_" + $("#order_status").val() + "']").addClass('color');
+									$(".user-statu").removeClass('active');
+									$("a[id='order_" + $("#order_status").val() + "']").parent(".user-statu").addClass('active');
+								} else if($("#evaluate_status").val() == 'unevaluate') {
+									$("a[class^='tabs-']").removeClass('color');
+									$("a[id='order_unevaluate']").addClass('color');
+									$(".user-statu").removeClass('active');
+									$("a[id='order_unevaluate']").parent(".user-statu").addClass('active');
+								} else {
+									$("a[class^='tabs-']").removeClass('color');
+									$("a[id='order_all']").addClass('color');
+									$(".user-statu").removeClass('active');
+									$("a[id='order_all']").parent(".user-statu").addClass('active');
+								}
+
+								// 序列化表单为JSON对象
+								var data = $(this).serializeJson();
+								// Ajax加载数据
+								tablelist.load(data);
+								// 阻止表单提交
+								return false;
+							});
+						});
+
+						$("#searchFormSubmit").click(function() {
+							$("#searchForm").submit();
+						});
+
+						$("a[class^='tabs-']").click(function() {
+							$.loading.start();
+
+							$("a[class^='tabs-']").removeClass('color');
+							$(".user-statu").removeClass('active');
+							$(this).addClass('color');
+							$(this).parent(".user-statu").addClass('active');
+
+							if($(this).attr("id") == "order_all") {
+								$("#order_status").val("");
+								$("#evaluate_status").val("");
+							} else if($(this).attr("id") == "order_unevaluate") {
+								$("#evaluate_status").val($(this).attr("id").substr(6));
+								$("#order_status").val("");
+							} else {
+								$("#order_status").val($(this).attr("id").substr(6));
+								$("#evaluate_status").val("");
+							}
+
+							tablelist = $("#table_list").tablelist({
+								params: $("#searchForm").serializeJson(),
+								callback: function() {
+									$.loading.stop();
+
+									if($(".con-right").height() != $(".con-left").height()) {
+										$(".con-left").height($(".con-right").height());
+									}
+								}
+							});
+							tablelist.load();
+						});
+
+						function order_delete(order_id, type) {
+							var text = "";
+							var url = "/user/order/list.html";
+							if(type == 2) {
+								text = "您确定要彻底删除该订单吗？";
+								url += "?is_delete=1";
+							} else if(type == 1) {
+								text = "您确定要删除该订单吗？";
+							} else {
+								text = "您确定要还原该订单吗？";
+								url += "?is_delete=1";
+							}
+
+							layer.alert(text, {
+								icon: 3,
+								skin: 'layer-ext-moon',
+								btn: ['确定', '取消']
+							}, function() {
+								$.loading.start();
+								$.ajax({
+									type: 'POST',
+									url: '/user/order/delete.html',
+									data: {
+										order_id: order_id,
+										type: type,
+									},
+									dataType: 'json',
+									success: function(data) {
+										$.loading.stop();
+										$.msg(data.message);
+
+										if(data.code == 0) {
+											$.go(url);
+										}
+									}
+								});
+							}, function(index) {
+								layer.close(index);
+							});
+						}
+
+						function order_deletes(type) {
+							var order_ids = document.getElementsByName("order_delete");
+							var order_id = new Array();
+
+							for(var i = 0; i < order_ids.length; i++) {
+								if(order_ids[i].checked == true) {
+									order_id[i] = order_ids[i].value;
+								}
+							}
+
+							if(order_id.length <= 0) {
+								$.msg("请勾选待删除订单！");
+								return false;
+							}
+
+							$.loading.start();
+							$.ajax({
+								type: 'POST',
+								url: '/user/order/delete.html',
+								data: {
+									order_id: order_id,
+									type: 3,
+								},
+								dataType: 'json',
+								success: function(data) {
+									$.loading.stop();
+
+									var text = "";
+									var url = "/user/order/list.html";
+									if(type == 2) {
+										text = "您确定要批量彻底删除这些订单吗？";
+										url += "?is_delete=1";
+									} else if(type == 1) {
+										text = data.message;
+									} else {
+										text = "您确定要批量还原这些订单吗？";
+										url += "?is_delete=1";
+									}
+
+									layer.alert(text, {
+										icon: 3,
+										skin: 'layer-ext-moon',
+										btn: ['确定', '取消']
+									}, function(index) {
+										if(data.code == 0) {
+											$.loading.start();
+											$.ajax({
+												type: 'POST',
+												url: '/user/order/delete.html',
+												data: {
+													order_id: order_id,
+													type: type,
+												},
+												dataType: 'json',
+												success: function(data) {
+													$.loading.stop();
+													$.msg(data.message);
+
+													if(data.code == 0) {
+														$.go(url);
+													}
+												}
+											});
+										} else {
+											layer.close(index);
+										}
+									}, function(index) {
+										layer.close(index);
+									});
+								}
+							});
+						}
+					</script>
+				</div>
+
+				<!-- 正文结束，由view提供 -->
+			</div>
+		</div>
+
+		<!-- 引入底部文件 -->
+		<!-- 底部 _start-->
+		<div class="site-footer">
+			<div class="footer-related">
+				<div class="footer-info">
+					<div class="info-text">
+						<!-- 底部导航 -->
+						<p class="nav-bottom">
+						</p>
+						<p>
+							Copyright IT教育咨询有限公司(www.ymcc.com) 版权所有
+							<a href="http://www.miibeian.gov.cn/" target="_blank">蜀ICP备88888888号</a>
+						</p>
+						<p class="company-info" style="display: none;">四川省成都市高新区天府新谷</p>
+						<p class="qualified">
+						</p>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery.fly.min.js"></script>
+	</div>
+	</body>
+
+	<script type="application/javascript">
+		new Vue({
+			el: "#myBody",
+			data() {
+				return {
+					datas:[],
+					total: 0
+				}
+			},
+			methods: {
+				loadOrders(){
+					var _this = this;
+					_this.$http.post("/order/courseOrder/forUser",{rows:100}).then(res=>{
+						_this.datas = res.data.data.rows;
+						_this.total = res.data.data.total;
+					})
+				}
+			},
+			mounted() {
+				this.loadOrders();
+			}
+		})
+	</script>
+	</html>

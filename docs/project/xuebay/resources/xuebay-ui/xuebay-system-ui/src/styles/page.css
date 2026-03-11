@@ -1,0 +1,25 @@
+/*全局样式配置*/
+.el-table .row-bg-red{
+  background: #ffdfe0;
+}
+.el-table .row-bg-green{
+  background: #eefff1;
+}
+/*.el-table .row-bg-blue{*/
+/*background: #ebe8ff;*/
+/*}*/
+.el-table td, .el-table th{
+  padding: 4px 0;
+}
+.el-tag{
+  height: 25px;
+  line-height: 25px;
+}
+.el-button{
+  padding: 10px 14px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+input{
+  padding: 0 15px;
+}

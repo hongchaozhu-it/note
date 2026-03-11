@@ -1,0 +1,1852 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+
+<head>
+    <link rel="shortcut icon" href="https://www.itsource.cn/img/logo_small.jpg">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>IT网 - 购我所爱 I LOVE BUY</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <!-- 网站头像 -->
+    <link type="text/css" rel="stylesheet" href="css/iconfont.css">
+    <link type="text/css" rel="stylesheet" href="css/common.css">
+    <!--整站改色 _start-->
+    <link type="text/css" rel="stylesheet" href="css/color-style.css">
+    <!--整站改色 _end-->
+    <link rel="stylesheet" href="css/layer.css" id="layuicss-skinlayercss">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/layer.js"></script>
+    <script type="text/javascript" src="js/jquery.method.js"></script>
+    <script type="text/javascript" src="js/jquery.modal.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <!-- 图片缓载js -->
+    <script type="text/javascript" src="js/jquery.lazyload.js"></script>
+    <!--导入vue和axios-->
+    <script type="text/javascript" src="js/plugins/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="js/plugins/axios/dist/axios.js"></script>
+    <script type="text/javascript" src="js/axios.common.js"></script>
+    <link rel="stylesheet" href="js/jqueryAlert/alert.css">
+    <script src="js/jqueryAlert/alert.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // 搜索框提示显示
+            $('.SZY-SEARCH-BOX .SZY-SEARCH-BOX-KEYWORD').focus(function () {
+                $(".SZY-SEARCH-BOX .SZY-SEARCH-BOX-HELPER").show();
+            });
+            // 搜索框提示隐藏
+            $(".SZY-SEARCH-BOX-HELPER .close").on('click', function () {
+                $(".SZY-SEARCH-BOX .SZY-SEARCH-BOX-HELPER").hide();
+            });
+            // 清除记录
+            $(".SZY-SEARCH-BOX-HELPER .clear").click(function () {
+                var url = '/search/clear-record.html';
+                $.post(url, {}, function (result) {
+                    if (result.code == 0) {
+                        $(".history-results .active").empty();
+                    } else {
+                    }
+                }, 'json');
+            });
+
+            $(".SZY-SEARCH-BOX-TOP .SZY-SEARCH-BOX-SUBMIT-TOP").click(function () {
+                if ($(".search-li-top.curr").attr('num') == 0) {
+                    var keyword_obj = $(this).parents(".SZY-SEARCH-BOX-TOP").find(".SZY-SEARCH-BOX-KEYWORD");
+
+                    var keywords = $(keyword_obj).val();
+                    if ($.trim(keywords).length == 0 || $.trim(keywords) == "请输入关键词") {
+                        keywords = $(keyword_obj).data("searchwords");
+                    }
+                    $(keyword_obj).val(keywords);
+                }
+                $(this).parents(".SZY-SEARCH-BOX-TOP").find(".SZY-SEARCH-BOX-FORM").submit();
+            });
+
+            $(".SZY-SEARCH-BOX .SZY-SEARCH-BOX-SUBMIT").click(function () {
+                if ($(".search-li.curr").attr('num') == 0) {
+                    var keyword_obj = $(this).parents(".SZY-SEARCH-BOX").find(".SZY-SEARCH-BOX-KEYWORD");
+
+                    var keywords = $(keyword_obj).val();
+                    if ($.trim(keywords).length == 0 || $.trim(keywords) == "请输入关键词") {
+                        keywords = $(keyword_obj).data("searchwords");
+                    }
+                    $(keyword_obj).val(keywords);
+                }
+                $(this).parents(".SZY-SEARCH-BOX").find(".SZY-SEARCH-BOX-FORM").submit();
+            });
+        });
+
+        function search_box_remove(key) {
+            var url = '/search/delete-record.html';
+            $.post(url, {
+                data: key
+            }, function (result) {
+                if (result.code == 0) {
+                    $("#" + key).css("display", "none");
+                } else {
+
+                }
+            }, 'json');
+        }
+
+        $(document).on("click", function (e) {
+            var target = $(e.target);
+            if (target.closest(".SZY-SEARCH-BOX").length == 0) {
+                $('.SZY-SEARCH-BOX-HELPER').hide();
+            }
+        });
+    </script>
+</head>
+
+<body class="pace-done">
+<div id="myBody">
+    <!-- 站点选择 -->
+    <div class="header-top">
+        <div class="header-box">
+
+            <!-- 站点 -->
+            <!--站点 start-->
+            <div class="SZY-SUBSITE">
+
+            </div>
+            <!--站点 end-->
+            <font id="login-info" class="login-info SZY-USER-NOT-LOGIN">
+                <a class="login color" href="http://127.0.0.1:6003/login.html" target="_top">请登录</a>
+                <a class="register" href="http://127.0.0.1:6003/register.html" target="_top">免费注册</a>
+            </font>
+            <font id="login-info" class="login-info SZY-USER-ALREADY-LOGIN" style="display: none;">
+                <em>
+                    <a href="user.html" target="_blank" class="color SZY-USER-NAME"></a>
+                    <!--欢迎您回来!-->
+                </em>
+                <a href="site/logout" data-method="post">退出</a>
+            </font>
+
+            <ul>
+                <li>
+                    <a class="menu-hd home" href="http://127.0.0.1:6002/index.html" target="_top">
+                        <i></i> IT首页
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <div class="menu">
+                        <a class="menu-hd myinfo" href="http://127.0.0.1:6003/user.home.html" target="_blank">
+                            <i></i> 会员中心
+                            <b></b>
+                        </a>
+                    </div>
+                </li>
+                <li class="menu-item cartbox">
+                    <div class="menu">
+                        <a class="menu-hd cart" href="cart.html" target="_top">
+                            <i></i> 购物车
+                            <span class="SZY-CART-COUNT">0</span>
+                            <b></b>
+                        </a>
+                        <div id="menu-4" class="menu-bd cart-box-main">
+                            <span class="menu-bd-mask"></span>
+                            <div class="dropdown-layer">
+                                <div class="spacer"></div>
+                                <div class="dropdown-layer-con cartbox-goods-list">
+
+                                    <!-- 正在加载 -->
+                                    <div class="cart-type">
+                                        <i class="cart-type-icon"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu">
+                        <a class="menu-hd we-chat" href="" target="_top">
+                            <i></i> 关注IT
+                            <b></b>
+                        </a>
+                        <div id="menu-5" class="menu-bd we-chat-qrcode">
+                            <span class="menu-bd-mask"></span>
+                            <a target="_top">
+                                <img src="img/test/mall_wx_qrcode_0.jpg" alt="官方微信">
+                            </a>
+                            <p class="font-14">关注官方微信</p>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu">
+                        <a href="" class="menu-hd site-nav" target="_blank">
+                            更多支持
+                            <b></b>
+                        </a>
+                        <div id="menu-7" class="menu-bd site-nav-main">
+                            <span class="menu-bd-mask"></span>
+                            <div class="menu-bd-panel">
+                                <div class="site-nav-con">
+
+                                    <a href="article/info?id=38" target="_blank" title="新手上路">新手上路</a>
+
+                                    <a href="article/info?id=38" target="_blank" title="支付方式">支付方式</a>
+
+                                    <a href="article/list/3.html" target="_blank" title="配送服务">配送服务</a>
+
+                                    <a href="article/list/4.html" target="_blank" title="售后服务">售后服务</a>
+
+                                    <a href="article/info?id=38" target="_blank" title="商家合作">商家合作</a>
+
+                                    <a href="list.html?cat_id=17" target="_blank" title="机构街">机构街</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="w1210">
+            <div class="logo-info">
+                <a href="/" class="logo">
+                    <img src="img/test/mall_logo_0.png">
+                </a>
+
+                <!-- logo右侧小广告 _start -->
+                <a href="#" class="logo-right">
+                    <img src="img/test/mall_logo_right_ad_image_0.png">
+                </a>
+                <!-- logo右侧小广告 _end -->
+
+            </div>
+            <div class="search SZY-SEARCH-BOX">
+                <form class="search-form SZY-SEARCH-BOX-FORM" method="get" action="list.html">
+                    <div class="search-info">
+                        <div class="search-type-box">
+                            <ul class="search-type">
+                                <li class="search-li curr" num="0">课程</li>
+                                <li class="search-li" num="1">机构</li>
+                            </ul>
+                            <i></i>
+                        </div>
+                        <div class="search-box">
+                            <div class="search-box-con">
+                                <input type="text" class="keyword search-box-input SZY-SEARCH-BOX-KEYWORD"
+                                       v-model="queryParams.keyword" name="keyword" tabindex="9" autocomplete="off"
+                                       data-searchwords="特价课程" placeholder="搜索特价课程" value="">
+                            </div>
+                        </div>
+                        <!--								<input type="hidden" id="searchtype" name="type" value="0" class="searchtype">-->
+                        <button id="btn_search_box_submit"
+                                class="button bg-color btn_search_box_submit SZY-SEARCH-BOX-SUBMIT"></button>
+                    </div>
+                    <!---热门搜索热搜词显示--->
+
+                    <div class="search-results hide SZY-SEARCH-BOX-HELPER">
+                        <ul class="history-results">
+                            <li class="title">
+                                <span>最近搜索</span>
+                                <a href="javascript:void(0);" class="clear-history clear">
+                                    <i></i> 清空
+                                </a>
+                            </li>
+                            <!---->
+                        </ul>
+                        <ul class="rec-results">
+                            <li class="title">
+                                <span>正在热搜中</span>
+                                <i class="close"></i>
+                            </li>
+
+                            <li>
+                                <a target="_blank" href="#">SpringBoot</a>
+                            </li>
+
+                            <li>
+                                <a target="_blank" href="#">SpringCloud</a>
+                            </li>
+
+                            <li>
+                                <a target="_blank" href="#">微服务</a>
+                            </li>
+
+                            <li>
+                                <a target="_blank" href="#">Redis</a>
+                            </li>
+
+                            <li>
+                                <a target="_blank" href="#">K8S</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </form>
+                <ul class="hot-query">
+                    <!-- 默认搜索词 -->
+
+                    <li class="first">
+                        <a href="#">Java</a>
+                    </li>
+
+                    <li>
+                        <a href="#">微服务</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Redis</a>
+                    </li>
+
+                    <li>
+                        <a href="#">SpringCloud</a>
+                    </li>
+
+                    <li>
+                        <a href="#">VUE</a>
+                    </li>
+
+                    <li>
+                        <a href="#">小程序</a>
+                    </li>
+
+                    <li>
+                        <a href="#">ElasticSearch</a>
+                    </li>
+
+                    <li>
+                        <a href="#">SpringBoot</a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <!-- 搜索框右侧小广告 _start -->
+
+            <div class="header-right">
+                <a href="#" title="">
+                    <img src="img/test/mall_search_right_ad_image_0.png">
+                </a>
+            </div>
+
+            <!-- 搜索框右侧小广告 _end -->
+
+        </div>
+    </div>
+
+    <!-- 站点导航 -->
+    <!-- 判断url链接 -->
+    <div class="category-box category-box-border">
+        <div class="w1210">
+            <div class="home-category fl">
+                <a href="http://127.0.0.1:6002/category.html" class="menu-event" title="查看全部课程分类">
+                    <i></i> 全部课程分类
+                </a>
+                <div class="expand-menu category-layer">
+                    <span class="category-layer-bg bg-color"></span>
+                </div>
+            </div>
+
+            <div class="all-category fl" id="nav">
+                <ul>
+
+                    <li class="fl">
+                        <a class="nav current" href="/" target="_blank" title="学习提升">学习提升</a>
+                        <!-- 导航小标签 _start -->
+
+                        <!-- 导航小标签 _end -->
+                    </li>
+
+                    <li class="fl">
+                        <a class="nav " href="#" target="_blank" title="找工作">找工作</a>
+                        <!-- 导航小标签 _start -->
+
+                        <!-- 导航小标签 _end -->
+                    </li>
+
+                    <li class="fl">
+                        <a class="nav " href="#" target="_blank" title="社交">社交</a>
+                        <!-- 导航小标签 _start -->
+
+                        <!-- 导航小标签 _end -->
+                    </li>
+
+                    <li class="fl">
+                        <a class="nav " href="#" target="_blank" title="学历深造">学历深造</a>
+                        <!-- 导航小标签 _start -->
+
+                        <span class="nav-icon">
+						<img src="img/test/14766722355540.gif">
+					</span>
+
+                        <!-- 导航小标签 _end -->
+                    </li>
+
+
+                    <li class="fr">
+                        <a class="nav " href="#" target="_blank" title="帮助中心">帮助中心</a>
+                        <!-- 导航小标签 _start -->
+
+                        <!-- 导航小标签 _end -->
+                    </li>
+
+                    <li class="fr">
+                        <a class="nav " href="#" target="_blank" title="学校合作">学校合作</a>
+                        <!-- 导航小标签 _start -->
+
+                        <span class="nav-icon">
+						<img src="img/test/14766722553394.gif">
+					</span>
+
+                        <!-- 导航小标签 _end -->
+                    </li>
+
+                    <li class="fl">
+                        <a class="nav " href="#" target="_blank" title="一折限量专区">抢购专区</a>
+                        <!-- 导航小标签 _start -->
+
+                        <span class="nav-icon">
+						<img src="img/test/14794053929710.gif">
+					</span>
+
+                        <!-- 导航小标签 _end -->
+                    </li>
+
+                </ul>
+                <div class="wrap-line" style="left: 0px; width: 72px;">
+                    <span style="left: 15px;"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 开始：主要区域内容 -->
+    <!-- css -->
+    <link type="text/css" rel="stylesheet" href="css/category.css">
+    <!-- 占位符 -->
+    <script type="text/javascript">
+        var begin_hidden = 0;
+
+        function Show_More_Attrgroup() {
+            if (begin_hidden == 0) {
+                $(".filter-attr").each(function (i) {
+                    $(this).show();
+                });
+                $('#attr-group-more-text').html("收起");
+                begin_hidden = 2;
+            } else {
+                $(".filter-attr").each(function (i) {
+                    if (i >= begin_hidden) {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    }
+                });
+                $('#attr-group-more-text').html("更多选项");
+                begin_hidden = 0;
+            }
+
+            var kuan1 = $("#attr-list-ul").width();
+            var kuan2 = $("#attr-group-more").width();
+            var kuan = (kuan1 - kuan2) / 2;
+            $('#attr-group-more').css("margin-left", kuan + "px");
+        }
+
+        // 是否显示“更多”__初始化
+        function init_more(boxid, moreid, height) {
+            var obj_brand = document.getElementById(boxid);
+            var more_brand = document.getElementById(moreid);
+            if (obj_brand.clientHeight > height) {
+                obj_brand.style.height = height + "px";
+                obj_brand.style.overflow = "hidden";
+                more_brand.innerHTML = '<a href="javascript:void(0);"  onclick="slideDiv(this, \'' + boxid + '\', \'' + height + '\');" class="more" >更多</a>';
+            }
+        }
+
+        // 收起
+        function slideDiv(thisobj, divID, Height) {
+            var obj = document.getElementById(divID).style;
+            if (obj.height == "") {
+                obj.height = Height + "px";
+                obj.overflow = "hidden";
+                thisobj.innerHTML = "更多";
+                thisobj.className = "more";
+                // 如果是品牌，额外处理
+                if (divID == 'brand-abox') {
+                    // obj.width="456px";
+                    getBrand_By_Zimu(document.getElementById('brand-zimu-all'), '');
+                    document.getElementById('brand-sobox').style.display = "none";
+                    document.getElementById('brand-zimu').style.display = "none";
+                    document.getElementById('brand-abox-father').className = "";
+                }
+            } else {
+                obj.height = "";
+                obj.overflow = "";
+                thisobj.innerHTML = "收起";
+                thisobj.className = "more opened";
+                // 如果是品牌，额外处理
+                if (divID == 'brand-abox') {
+                    // obj.width="456px";
+                    document.getElementById('brand-sobox').style.display = "block";
+                    document.getElementById('brand-zimu').style.display = "block";
+                    // getBrand_By_Zimu(document.getElementById('brand-zimu-all'),'');
+                    document.getElementById('brand-abox-father').className = "brand-more";
+                }
+            }
+        }
+
+        function getBrand_By_Name(val) {
+            val = val.toLocaleLowerCase();
+            var brand_list = document.getElementById('brand-abox').getElementsByTagName('li');
+            for (var i = 0; i < brand_list.length; i++) {
+                // document.getElementById('brand-abox').style.width="auto";
+                var name_attr_value = brand_list[i].getAttribute("name").toLocaleLowerCase();
+                if (brand_list[i].title.indexOf(val) == 0 || name_attr_value.indexOf(val) == 0 || val == '') {
+                    brand_list[i].style.display = 'block';
+                } else {
+                    brand_list[i].style.display = 'none';
+                }
+            }
+        }
+
+        // 点击字母切换品牌
+        function getBrand_By_Zimu(obj, zimu) {
+            document.getElementById('brand-sobox-input').value = "可搜索拼音、汉字查找品牌";
+            obj.focus();
+            var brand_zimu = document.getElementById('brand-zimu');
+            var zimu_span_list = brand_zimu.getElementsByTagName('span');
+            for (var i = 0; i < zimu_span_list.length; i++) {
+                zimu_span_list[i].className = '';
+            }
+            var thisspan = obj.parentNode;
+            thisspan.className = 'span';
+            var brand_list = document.getElementById('brand-abox').getElementsByTagName('li');
+            for (var i = 0; i < brand_list.length; i++) {
+                // document.getElementById('brand-abox').style.width="auto";
+                if (brand_list[i].getAttribute('rel') == zimu || zimu == '') {
+                    brand_list[i].style.display = 'block';
+                } else {
+                    brand_list[i].style.display = 'none';
+                }
+            }
+        }
+
+        var duoxuan_a_valid = new Array();
+
+        // 点击多选， 显示多选区
+        function showDuoXuan(dx_divid, a_valid_id) {
+            var dx_dl_div = document.getElementById('attr-list-ul').getElementsByTagName('dl');
+            for (var i = 0; i < dx_dl_div.length; i++) {
+                dx_dl_div[i].className = '';
+                //dx_dl_div[0].className = 'selected-attr-dl';
+            }
+            var dxDiv = document.getElementById(dx_divid);
+            dxDiv.className = "duoxuan";
+            duoxuan_a_valid[a_valid_id] = 1;
+
+        }
+
+        function hiddenDuoXuan(dx_divid, a_valid_id) {
+            var dxDiv = document.getElementById(dx_divid);
+            dxDiv.className = "";
+            duoxuan_a_valid[a_valid_id] = 0;
+            if (a_valid_id == 'brand') {
+                var ul_obj_div = document.getElementById('brand-abox');
+                var li_list_div = ul_obj_div.getElementsByTagName('li');
+                if (li_list_div) {
+                    for (var j = 0; j < li_list_div.length; j++) {
+                        li_list_div[j].className = "";
+                    }
+                }
+            } else {
+                var ul_obj_div = document.getElementById('attr-abox-' + a_valid_id);
+            }
+            var input_list = ul_obj_div.getElementsByTagName('input');
+            var span_list = ul_obj_div.getElementsByTagName('span');
+            for (var j = 0; j < input_list.length; j++) {
+                input_list[j].checked = false;
+            }
+            if (span_list.length) {
+                for (var j = 0; j < span_list.length; j++) {
+                    span_list[j].className = "";
+                }
+            }
+        }
+
+        function duoxuan_Onclick(a_valid_id, idid, thisobj) {
+            if (duoxuan_a_valid[a_valid_id]) {
+                if (thisobj) {
+                    var fatherObj = thisobj.parentNode;
+                    if (a_valid_id == "brand") {
+                        fatherObj.className = fatherObj.className == "brand-seled" ? "" : "brand-seled";
+                    } else {
+                        fatherObj.className = fatherObj.className == "" ? "selected" : "";
+                    }
+                }
+                document.getElementById('chk-' + a_valid_id + '-' + idid).checked = !document.getElementById('chk-' + a_valid_id + '-' + idid).checked;
+                return false;
+            }
+        }
+
+        function duoxuan_Submit(dxid, indexid, url) {
+
+            var theForm = document.forms['theForm'];
+            var chklist = theForm.elements['checkbox_' + dxid + '[]'];
+            var value = "";
+            var mm = 0;
+
+            for (var k = 0; k < chklist.length; k++) {
+                if (chklist[k].checked) {
+                    value += mm > 0 ? "_" : "";
+                    value += chklist[k].value;
+                    mm++;
+                }
+            }
+
+            if (mm == 0) {
+                return false;
+            }
+
+            if (dxid == 'brand') {
+                url = url.replace("{0}", value);
+            } else {
+                url = url.replace("{0}", value);
+            }
+
+            $.go(url);
+        }
+
+        //自定义价格
+        function setPrice(url) {
+            var max = $('#price_max').val();
+            var min = $('#price_min').val();
+            if (max > 0 & min >= 0) {
+                var url = url.replace("{0}", min).replace("{1}", max);
+            } else {
+                var url = url.replace("{0}", 0).replace("{1}", 0);
+            }
+            $.go(url);
+        }
+    </script>
+    <!-- 缓载图片 -->
+    <div class="blank"></div>
+    <div class="w1210">
+        <!--热卖推荐-->
+
+        <div id="hotsale">
+            <div class="hd bg-color">最热课程</div>
+            <div class="mc">
+
+                <dl>
+                    <dt>
+                        <a target="_blank" href="#" title="Gradle入门到精通"
+                           style="background: url({ imageurl($ lazyload_image)">
+                            <img src="img/test/14801613319305.jpg"
+                                 data-original="http://itsource.oss-cn-beijing.aliyuncs.com/图片/shop/6/gallery/2016/11/11/14788784646707.jpg?x-oss-process=image/resize,m_pad,limit_0,h_320,w_320"
+                                 alt="" style="display: inline;">
+                        </a>
+                    </dt>
+                    <dd>
+                        <div class="p-name">
+                            <a target="_blank" href="#" title="Gradle入门到精通">Gradle入门到精通</a>
+                        </div>
+                        <div class="p-price">
+                            特价：
+                            <font class="shop-price second-color"> ￥2999 </font>
+                        </div>
+                        <div class="btns">
+                            <a target="_blank" href="#" class="bg-color">查看详情</a>
+                        </div>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt>
+                        <a target="_blank" href="#" title="linux运维与云计算"
+                           style="background: url({ imageurl($ lazyload_image)">
+                            <img src="img/test/14801613383873.jpg"
+                                 data-original="http://itsource.oss-cn-beijing.aliyuncs.com/图片/shop/6/gallery/2016/11/12/14789657995869.png?x-oss-process=image/resize,m_pad,limit_0,h_320,w_320"
+                                 alt="" style="display: inline;">
+                        </a>
+                    </dt>
+                    <dd>
+                        <div class="p-name">
+                            <a target="_blank" href="#" title="linux运维与云计算">linux运维与云计算</a>
+                        </div>
+                        <div class="p-price">
+                            特价：
+                            <font class="shop-price second-color"> ￥3999 </font>
+                        </div>
+                        <div class="btns">
+                            <a target="_blank" href="#" class="bg-color">查看详情</a>
+                        </div>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt>
+                        <a target="_blank" href="#" title="VUEIT解析系列"
+                           style="background: url({ imageurl($ lazyload_image)">
+                            <img src="img/test/14801613483505.jpg"
+                                 data-original="http://itsource.oss-cn-beijing.aliyuncs.com/图片/shop/6/gallery/2016/11/12/14789669544048.png?x-oss-process=image/resize,m_pad,limit_0,h_320,w_320"
+                                 alt="" style="display: inline;">
+                        </a>
+                    </dt>
+                    <dd>
+                        <div class="p-name">
+                            <a target="_blank" href="#" title="VUEIT解析系列">VUEIT解析系列</a>
+                        </div>
+                        <div class="p-price">
+                            特价：
+                            <font class="shop-price second-color"> ￥2000 </font>
+                        </div>
+                        <div class="btns">
+                            <a target="_blank" href="#" class="bg-color">查看详情</a>
+                        </div>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt>
+                        <a target="_blank" href="#" title="大型互联网实战技术"
+                           style="background: url({ imageurl($ lazyload_image)">
+                            <img src="img/test/14801613539784.jpg"
+                                 data-original="http://itsource.oss-cn-beijing.aliyuncs.com/图片/shop/6/gallery/2016/11/12/14789686200823.png?x-oss-process=image/resize,m_pad,limit_0,h_320,w_320"
+                                 alt="" style="display: inline;">
+                        </a>
+                    </dt>
+                    <dd>
+                        <div class="p-name">
+                            <a target="_blank" href="#" title="大型互联网实战技术">大型互联网实战技术</a>
+                        </div>
+                        <div class="p-price">
+                            特价：
+                            <font class="shop-price second-color"> ￥1500 </font>
+                        </div>
+                        <div class="btns">
+                            <a target="_blank" href="#" class="bg-color">查看详情</a>
+                        </div>
+                    </dd>
+                </dl>
+
+            </div>
+        </div>
+
+        <!--当前位置，面包屑-->
+        <div class="breadcrumb clearfix">
+            <a href="http://127.0.0.1:6002/" class="index">首页</a>
+
+            <span class="crumbs-arrow">&gt;</span>
+            <div class="crumbs-nav crumbs-nav0" v-for="node in crumbs" :key="node">
+                <!--http://127.0.0.1:6002/list.html?courseTypeId=1040-->
+                <a class="crumbs-title" :href="listUrl + node.ownerProductType.id">
+                    {{node.ownerProductType.name}}
+                    <i class="icon"></i>
+                </a>&nbsp;&nbsp;
+                <div class="crumbs-drop">
+                    <ul class="crumbs-drop-list">
+                        <li v-for="courseType in node.otherProductTypes" :key="courseType">
+                            <a :href="listUrl + courseType.id">{{courseType.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <script type="text/javascript">
+                $().ready(function () {
+                    $("#1484876051a6FW9i").find(".search-button").click(function () {
+                        var keyword = $("#1484876051a6FW9i").find("[name='keyword']").val();
+
+                        var url = "/list.html?cat_id=27&amp;go=1&amp;sort=1&amp;order=DESC&amp;style=grid&amp;region=51_01&amp;keyword={0}";
+                        url = url.replace(/&amp;/g, "&");
+
+                        if ($.trim(keyword) == '在当前分类下搜索') {
+                            url = url.replace("{0}", "");
+                        } else {
+                            url = url.replace("{0}", $.trim(keyword));
+                        }
+
+                        $.go(url);
+                    });
+                    $("#1484876051a6FW9i").find("[name='keyword']").click(function () {
+                        if ($(this).val() == '在当前分类下搜索') {
+                            $(this).val("");
+                        }
+                    });
+                });
+            </script>
+
+        </div>
+
+        <form action="http://127.0.0.1:6002/list-27-1-0-0-0-0-0-1-3-51_01-0.html" method="post" name="theForm">
+            <!--筛选条件-->
+            <div class="search-wrap" id="attr-list-ul" style="border-top: none;">
+                <!--已选条件-->
+
+                <!--品牌-->
+                <p style="text-align: right;padding-bottom: 5px">
+                    <a @click="clearWhere" href="javascript:void(0)"
+                       style="border: 1px solid #eee ; padding: 5px">清除条件</a>
+                </p>
+
+
+                <dl>
+                    <dt>等级：</dt>
+                    <dd class="moredd">&nbsp;</dd>
+                    <dd>
+                        <ul>
+
+                            <li v-for="(grade,i) in grades">
+                                <a @click="changeGrade" :gradeName="grade.key"
+                                   href="javascript:void(0)">{{grade.key}}({{grade.docCount}})</a>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>收费方式：</dt>
+                    <dd class="moredd">&nbsp;</dd>
+                    <dd>
+                        <ul>
+
+                            <li v-for="(charge,i) in charges">
+                                <a @click="changeCharge" :chargeName="charge.key"
+                                   href="javascript:void(0)">{{charge.key}}({{charge.docCount}})</a>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>价格：</dt>
+                    <dd class="moredd">&nbsp;</dd>
+                    <dd>
+                        <ul>
+
+                            <li>
+                                <a @click="changePrice" minPrice="0" maxPrice="50" href="javascript:void(0)">0&nbsp;-&nbsp;50</a>
+                            </li>
+
+                            <li>
+                                <a @click="changePrice" minPrice="50" maxPrice="100" href="javascript:void(0)">50&nbsp;-&nbsp;100</a>
+                            </li>
+
+                            <li>
+                                <a @click="changePrice" minPrice="100" maxPrice="200" href="javascript:void(0)">100&nbsp;-&nbsp;200</a>
+                            </li>
+
+                            <li>
+                                <a @click="changePrice" minPrice="200" maxPrice="500" href="javascript:void(0)">200&nbsp;-&nbsp;500</a>
+                            </li>
+
+                            <li>
+                                <a @click="changePrice" minPrice="500" maxPrice="1000" href="javascript:void(0)">500&nbsp;-&nbsp;1000</a>
+                            </li>
+                            <li>
+                                <a @click="changePrice" minPrice="1000" href="javascript:void(0)">1000以上</a>
+                            </li>
+
+                            <li>
+                                <input name="price_min" id="price_min" value="" class="input-txt" autocomplete="off"
+                                       type="text" onkeyup="this.value=this.value.replace(/\D/g,&#39;&#39;)"
+                                       onafterpaste="this.value=this.value.replace(/\D/g,&#39;&#39;)">
+                                <i></i>
+                                <input name="price_max" id="price_max" value="" class="input-txt" autocomplete="off"
+                                       type="text" onkeyup="this.value=this.value.replace(/\D/g,&#39;&#39;)"
+                                       onafterpaste="this.value=this.value.replace(/\D/g,&#39;&#39;)">
+                                <a class="select-button" href="javascript:void(0);"
+                                   onclick="setPrice(&#39;/list-27-0-0-0-0-0-0-1-3-51_01-0-0-{0}-{1}.html&#39;);">确定</a>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+
+                <!--当展开时，为dl添加duoxuan样式-->
+                <!--颜色-->
+                <!-- -->
+            </div>
+
+        </form>
+
+        <script type="text/javascript">
+            $(function () {
+                $('.other-vattr-li').bind('click', function () {
+                    var seled_input_num = $(this).parents('ul').find('input[type="checkbox"]:checked').length;
+                    if (seled_input_num > 0) {
+                        $(this).parents('dd').find('.select-button').eq(0).attr('class', 'select-button select-button-sumbit');
+                    } else if (seled_input_num == 0) {
+                        $(this).parents('dd').find('.select-button').eq(0).attr('class', 'select-button disabled');
+                    }
+                })
+            })
+        </script>
+        <div class="blank15"></div>
+        <div class="content-wrap category-wrap clearfix">
+            <!--右侧内容-->
+            <div class="main" style="padding-left: 0px">
+                <div class="" id="filter" style="">
+                    <!--排序-->
+                    <form method="GET" name="listform"
+                          action="http://127.0.0.1:6002/list-27-1-0-0-0-0-0-1-3-51_01-0.html">
+                        <div class="fore1">
+                            <dl class="order">
+                                <dd class="">
+                                    <a href="javascript:;" sortField="xl" sortType="desc"
+                                       v-on:click="changeSrot($event)">
+                                        销量
+                                        <b class="icon-order-DESCending"></b>
+                                    </a>
+                                </dd>
+
+                                <dd class="">
+                                    <a href="javascript:;" sortField="xp" sortType="desc"
+                                       v-on:click="changeSrot($event)">
+                                        新品
+                                        <b class="icon-order-DESCending"></b>
+
+                                    </a>
+                                </dd>
+
+                                <dd class="">
+                                    <a href="javascript:;" sortField="pl" sortType="desc"
+                                       v-on:click="changeSrot($event)">
+                                        评论
+                                        <b class="icon-order-DESCending"></b>
+
+                                    </a>
+                                </dd>
+
+                                <dd class="">
+                                    <a href="javascript:;" sortField="jg" sortType="desc"
+                                       v-on:click="changeSrot($event)">
+                                        价格
+
+                                        <b class="icon-order-DESCending"></b>
+
+                                    </a>
+                                </dd>
+
+                                <dd class="">
+                                    <a href="javascript:;" sortField="rq" sortType="desc"
+                                       v-on:click="changeSrot($event)">
+                                        人气
+
+                                        <b class="icon-order-DESCending"></b>
+
+                                    </a>
+                                </dd>
+
+                            </dl>
+                            <div class="total" style="padding-right: 10px">
+                                共<span class="color">{{datas.total}}</span> 个课程
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <!--主体课程内容展示-->
+                <form name="compareForm" action="http://127.0.0.1:6002/compare.php" method="post" onsubmit=""
+                      id="table_list">
+                    <ul class="list-grid clearfix">
+                        <template v-for="(row,index) in datas.rows" :key="row">
+                            <!-- -->
+                            <!-- 如果是4的整数倍，给 li 标签添加class="last"值，即class="item last" -->
+                            <li class="item last" v-if="(index+1)%5==0">
+                                <div class="item-con">
+                                    <!--售罄-->
+                                    <div class="item-pic">
+                                        <a :href="'/detail.html?courseId='+row.id" :title="row.name" target="_blank"
+                                           style="background: url({ imageurl($ lazyload_image)">
+                                            <img alt="" :src="row.pic"
+                                                 data-original="http://itsource.img-cn-beijing.aliyuncs.com/图片/taobao-yun-images/537310635822/TB1RwYELXXXXXXHaXXXXXXXXXXX_!!0-item_pic.jpg?x-oss-process=image/resize,m_pad,limit_0,h_320,w_320"
+                                                 style="display: inline;">
+                                        </a>
+                                    </div>
+                                    <div class="img-scroll scrolled" style=" display: none;">
+                                        <a href="javascript:;" class="img-prev">&lt;</a>
+                                        <a href="javascript:;" class="img-next">&gt;</a>
+                                        <div class="img-wrap">
+                                            <ul class="img-main" style="left: 0px; width: 238px;">
+                                                <li class="img-item">
+                                                    <a href="javascript:;" title="粉色" class="curr"><img width="25"
+                                                                                                          height="25"
+                                                                                                          src="img/test/1.jpg"></a>
+                                                </li>
+                                                <li class="img-item">
+                                                    <a href="javascript:;" title="红色"><img width="25" height="25"
+                                                                                             src="img/test/2.jpg"></a>
+                                                </li>
+                                                <li class="img-item">
+                                                    <a href="javascript:;" title=""><img width="25" height="25"
+                                                                                         src="img/test/3.jpg"></a>
+                                                </li>
+                                                <li class="img-item">
+                                                    <a href="javascript:;" title=""><img width="25" height="25"
+                                                                                         src="img/test/4.jpg"></a>
+                                                </li>
+                                                <li class="img-item">
+                                                    <a href="javascript:;" title=""><img width="25" height="25"
+                                                                                         src="img/test/5.jpg"></a>
+                                                </li>
+                                                <li class="img-item">
+                                                    <a href="javascript:;" title=""><img width="25" height="25"
+                                                                                         src="img/test/3.jpg"></a>
+                                                </li>
+                                                <li class="img-item">
+                                                    <a href="javascript:;" title=""><img width="25" height="25"
+                                                                                         src="img/test/4.jpg"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="item-info">
+                                        <div class="item-price">
+                                            <em class="sale-price second-color">¥ {{row.price}}</em>
+                                            <em class="sale-count">讲师 {{row.teacherNames}}</em>
+                                        </div>
+                                        <div class="item-name">
+                                            <!--													   <a :href="row.id+'.html'" target="_blank" :title="row.name" v-html="row.name"></font></a>-->
+                                            <a :href="'detail.html'+row.id" target="_blank" :title="row.name"
+                                               v-html="row.name"></font></a>
+                                        </div>
+                                        <div class="item-con-info">
+                                            <div class="fl">
+                                                <div class="item-shop">
+                                                    <a href="http://127.0.0.1:6002/shop/6" target="_blank"
+                                                       title="IT云课堂">
+                                                        <!--   -->
+                                                        <span style="color: #878787">{{row.gradeName}} . {{row.saleCount}}人报名</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li class="item" v-if="(index+1)%5!=0">
+                                <div class="item-con">
+                                    <!--售罄-->
+                                    <div class="item-pic">
+
+                                        <!--												   <a :href="row.id+'.html'" :title="row.name" target="_blank" style="background: url({ imageurl($ lazyload_image)">-->
+                                        <!--													   <img alt="img/test/TB1RwYELXXXXXXHaXXXXXXXXXXX_!!0-item_pic(1).jpg"-->
+                                        <!--															:src="row.pic" data-original="http://itsource.img-cn-beijing.aliyuncs.com/图片/taobao-yun-images/537310635822/TB1RwYELXXXXXXHaXXXXXXXXXXX_!!0-item_pic.jpg?x-oss-process=image/resize,m_pad,limit_0,h_320,w_320" style="display: inline;">-->
+                                        <!--												   </a>-->
+
+                                        <a :href="'detail.html?courseId='+row.id" :title="row.name" target="_blank"
+                                           style="background: url({ imageurl($ lazyload_image)">
+                                            <img alt="img/test/TB1RwYELXXXXXXHaXXXXXXXXXXX_!!0-item_pic(1).jpg"
+                                                 :src="row.pic"
+                                                 data-original="http://itsource.img-cn-beijing.aliyuncs.com/图片/taobao-yun-images/537310635822/TB1RwYELXXXXXXHaXXXXXXXXXXX_!!0-item_pic.jpg?x-oss-process=image/resize,m_pad,limit_0,h_320,w_320"
+                                                 style="display: inline;">
+                                        </a>
+                                    </div>
+                                    <div class="img-scroll scrolled" style=" display: none;">
+                                        <a href="javascript:;" class="img-prev">&lt;</a>
+                                        <a href="javascript:;" class="img-next">&gt;</a>
+                                        <div class="img-wrap">
+                                            <ul class="img-main" style="left: 0px; width: 238px;">
+                                                <li class="img-item">
+                                                    <a href="javascript:;" title="粉色" class="curr"><img width="25"
+                                                                                                          height="25"
+                                                                                                          src="img/test/1.jpg"></a>
+                                                </li>
+                                                <li class="img-item">
+                                                    <a href="javascript:;" title="红色"><img width="25" height="25"
+                                                                                             src="img/test/2.jpg"></a>
+                                                </li>
+                                                <li class="img-item">
+                                                    <a href="javascript:;" title=""><img width="25" height="25"
+                                                                                         src="img/test/3.jpg"></a>
+                                                </li>
+                                                <li class="img-item">
+                                                    <a href="javascript:;" title=""><img width="25" height="25"
+                                                                                         src="img/test/4.jpg"></a>
+                                                </li>
+                                                <li class="img-item">
+                                                    <a href="javascript:;" title=""><img width="25" height="25"
+                                                                                         src="img/test/5.jpg"></a>
+                                                </li>
+                                                <li class="img-item">
+                                                    <a href="javascript:;" title=""><img width="25" height="25"
+                                                                                         src="img/test/3.jpg"></a>
+                                                </li>
+                                                <li class="img-item">
+                                                    <a href="javascript:;" title=""><img width="25" height="25"
+                                                                                         src="img/test/4.jpg"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="item-info">
+                                        <div class="item-price">
+                                            <em class="sale-price second-color">¥ {{row.price}}</em>
+                                            <em class="sale-count">讲师 {{row.teacherNames}}</em>
+                                        </div>
+                                        <div class="item-name">
+                                            <a :href="row.id+'.html'" target="_blank" :title="row.name"
+                                               v-html="row.name">{{row.name}}</a>
+                                        </div>
+                                        <div class="item-con-info">
+                                            <div class="fl">
+                                                <div class="item-shop">
+                                                    <a href="http://127.0.0.1:6002/shop/6" target="_blank"
+                                                       title="IT云课堂">
+                                                        <!--   -->
+                                                        <span style="color: #878787">{{row.gradeName}} . {{row.saleCount}}人报名</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </li>
+
+                        </template>
+
+                    </ul>
+                    <!--分页-->
+                    <div class="pull-right page-box">
+
+                        <div id="pagination" class="page">
+                            <script data-page-json="true" type="text">
+                                {"page_key":"page","page_id":"pagination","default_page_size":10,"cur_page":1,"page_size":20,"page_size_list":[1,10,20,30,50],"record_count":1401,"page_count":71,"offset":0,"url":null,"sql":null}
+                            </script>
+                            <div class="page-wrap fr">
+                                <div class="total">共{{datas.total}}条记录</div>
+                            </div>
+                            <div class="page-num fr">
+										<span class="num prev disabled" style="display: none;">
+				<a class="fa fa-angle-double-left" data-go-page="1" title="第一页"></a>
+			</span>
+
+                                <span>
+				<a class="num prev " href="javascript:void(0);" @click="changePage" :data-page="1">首页</a>
+			</span>
+
+
+                                <span v-for="page in pages">
+				<span class="num curr" v-if="queryParams.page == page">
+					<a data-cur-page="1" href="javascript:void(0);" @click="changePage">{{page}}</a>
+				</span>
+
+				<span v-else>
+					<a class="num " href="javascript:void(0);" @click="changePage" :data-page="page">{{page}}</a>
+				</span>
+
+			</span>
+
+                                <span class="" style="display: none;">
+				<a class="num " data-go-page="71" title="最后一页"></a>
+			</span>
+
+
+                                <span>
+				<a class="num next" href="javascript:void(0);" @click="changePage" :data-page="pages">尾页</a>
+			</span>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+
+                <!--对比栏-->
+            </div>
+        </div>
+        <!--历史记录和猜你喜欢-->
+
+    </div>
+
+    <script type="text/javascript" src="js/jquery.region.js"></script>
+    <script type="text/javascript" src="js/jquery.widget.js"></script>
+    <script type="text/javascript" src="js/jquery.tablelist.js"></script>
+    <script type="text/javascript">
+        $().ready(function () {
+
+            var page_url = "/list-27-{0}-0-0-0-0-0-1-3-51_01-0.html";
+            page_url = page_url.replace(/&amp;/g, '&');
+
+            var tablelist = $("#table_list").tablelist({
+                page_mode: 1,
+                go: function (page) {
+                    page_url = page_url.replace("{0}", page);
+                    $.go(page_url);
+                }
+            });
+
+            $(".prev-page").click(function () {
+                tablelist.prePage();
+            });
+
+            $(".next-page").click(function () {
+                tablelist.nextPage();
+            });
+
+            $(".add-cart").click(function (event) {
+                var goods_id = $(this).data("goods-id");
+                var image_url = $(this).data("image-url");
+                $.cart.add(goods_id, 1, {
+                    is_sku: false,
+                    event: event,
+                    image_url: image_url,
+                    callback: function () {
+                        var attr_list = $('.attr-list').height();
+                        $('.attr-list').css({
+                            "overflow": "hidden"
+                        });
+                        if (attr_list >= 200) {
+                            $('.attr-list').css({
+                                "overflow-y": "auto"
+                            });
+                        }
+                    }
+                });
+                //列表页面属性弹框
+
+            });
+            $(".compare-btn").click(function (event) {
+                var goods_id = $(this).data("compare-goods-id");
+                var image_url = $(this).data("image-url");
+                var that = $(this);
+                if ($(this).hasClass("curr")) {
+                    $.compare.remove(goods_id, function (result) {
+                        if (result.code == 0) {
+                            that.removeClass('curr');
+                        }
+                    });
+                } else {
+                    $.compare.add(goods_id, image_url, event, function (result) {
+                        if (result.code == 0) {
+                            that.addClass('curr');
+                        }
+                    });
+                }
+            });
+
+            // 移除对对比课程
+            $.compare.removeCallback = function (goods_id, result) {
+                $("[data-compare-goods-id='" + goods_id + "']").removeClass('curr');
+            }
+            // 清空对比课程
+            $.compare.clearCallback = function (goods_id, result) {
+                $("[data-compare-goods-id]").removeClass('curr');
+            }
+
+            //规格相册
+            sildeImg(0);
+
+            <!-- 获取当前地址 -->
+            //地区组件
+            var region_chooser = $(".region-chooser-container").regionchooser({
+                value: "51,01",
+                change: function (value, names, is_last) {
+                    if (value == '') {
+                        var values = this.values();
+                        if (values.length > 0) {
+                            value = values[values.length - 1].region_code;
+                        }
+                    }
+
+                    var region_code = "51,01";
+                    if (is_last && value != region_code) {
+                        value = value + "";
+                        value = value.replace(/,/g, "_");
+                        var url = "/list-27-0-0-0-0-0-0-1-3-{0}-0.html";
+                        url = url.replace(/&amp;/g, '&');
+                        url = url.replace("{0}", value);
+                        $.go(url);
+                    }
+                }
+            });
+            var goods_ids = '2393-2436-2386-2607-2385-2384-2488-2454-2438-2397-2027-2606-2390-2439-1137-429-2440-1823-2437-2453';
+            $.collect.getGoodsList(goods_ids, null, function (result) {
+                var goods_list = result.data;
+                $(".goods-collect").each(function () {
+                    var goods_id = $(this).data("goods-id");
+                    if (result.code == 0) {
+                        if (goods_list[goods_id]) {
+                            $(this).addClass("curr");
+                            $(this).find("span").html("已收藏");
+                        } else {
+                            $(this).removeClass("curr");
+                            $(this).find("span").html("收藏");
+                        }
+                    }
+                });
+            });
+            $.compare.getGoodsList(goods_ids, function (result) {
+                var goods_list = result.data;
+                $(".goods-comapre").each(function () {
+                    var goods_id = $(this).data("compare-goods-id");
+                    if (result.code == 0) {
+                        if (goods_list[goods_id]) {
+                            $(this).addClass("curr");
+                        } else {
+                            $(this).removeClass("curr");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script type="text/javascript" src="js/category.js"></script>
+    <!-- 结束：主要区域内容-->
+
+    <!-- 站点底部-->
+
+    <!-- 右侧边栏 _start -->
+    <div class="right-sidebar-con">
+        <div class="right-sidebar-main">
+            <div class="right-sidebar-panel">
+                <div id="quick-links" class="quick-links">
+                    <ul>
+                        <li class="quick-area quick-login sidebar-user-trigger">
+                            <!-- 用户 -->
+                            <a href="javascript:void(0);" class="quick-links-a">
+                                <i class="setting"></i>
+                            </a>
+                            <div class="sidebar-user quick-sidebar">
+                                <i class="arrow-right"></i>
+                                <div class="sidebar-user-info">
+                                    <!-- 没有登录的情况 _start -->
+                                    <div class="SZY-USER-NOT-LOGIN" style="">
+                                        <div class="user-pic">
+                                            <div class="user-pic-mask"></div>
+                                            <img src="img/test/default_user_portrait_0.png">
+                                        </div>
+                                        <br>
+                                        <p>
+                                            你好！请
+                                            <a href="javascript:void(0);"
+                                               class="quick-login-a color ajax-login">登录</a>
+                                            |
+                                            <a href="http://127.0.0.1:6003/register.html" class="color">注册</a>
+                                        </p>
+                                    </div>
+                                    <!-- 没有登录的情况 _end -->
+                                    <!-- 有登录的情况 _start -->
+                                    <div class="SZY-USER-ALREADY-LOGIN" style="display: none;">
+                                        <div class="user-have-login">
+                                            <div class="user-pic">
+                                                <div class="user-pic-mask"></div>
+                                                <img src="" class="SZY-USER-PIC">
+                                            </div>
+                                            <div class="user-info">
+                                                <p>
+                                                    用&nbsp;&nbsp;&nbsp;户：
+                                                    <span class="SZY-USER-NAME"></span>
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                        <p class="m-t-10">
+													<span class="prev-login">
+						上次登录时间：
+						<span class="SZY-USER-LAST-LOGIN"></span>
+													</span>
+                                            <a href="user.html" class="btn account-btn" target="_blank">个人中心</a>
+                                            <a href="user/order.html" class="btn order-btn" target="_blank">订单中心</a>
+                                        </p>
+                                    </div>
+                                    <!-- 有登录的情况 _end -->
+                                </div>
+                            </div>
+                        </li>
+                        <li class="sidebar-tabs">
+                            <!-- 购物车 -->
+                            <div class="cart-list quick-links-a sidebar-cartbox-trigger">
+                                <i class="cart"></i>
+                                <div class="span">购物车</div>
+                                <span class="ECS_CARTINFO">
+									<span class="cart_num SZY-CART-COUNT">0</span>
+										<div class="sidebar-cart-box">
+											<h3 class="sidebar-panel-header">
+											<a href="javascript:void(0);" class="title">
+												<i class="cart-icon"></i>
+												<em class="title">购物车</em>
+											</a>
+											<span class="close-panel"></span>
+										</h3>
+										</div>
+										</span>
+                            </div>
+                        </li>
+                        <li class="sidebar-tabs">
+                            <a href="javascript:void(0);"
+                               class="mpbtn_history quick-links-a sidebar-historybox-trigger">
+                                <i class="history"></i>
+                            </a>
+                            <div class="popup">
+                                <font id="mpbtn_histroy">我看过的</font>
+                                <i class="arrow-right"></i>
+                            </div>
+                        </li>
+                        <!-- 如果当前页面有对比功能 则显示对比按钮 _start-->
+                        <li class="sidebar-tabs">
+                            <a href="javascript:void(0);"
+                               class="mpbtn-contrast quick-links-a sidebar-comparebox-trigger">
+                                <i class="contrast"></i>
+                            </a>
+                            <div class="popup">
+                                对比课程
+                                <i class="arrow-right"></i>
+                            </div>
+                        </li>
+                        <!-- 如果当前页面有对比功能 则显示对比按钮 _end-->
+                        <li>
+                            <a href="user/collect/shop.html" target="_blank" class="mpbtn_stores quick-links-a">
+                                <i class="stores"></i>
+                            </a>
+                            <div class="popup">
+                                我收藏的机构
+                                <i class="arrow-right"></i>
+                            </div>
+                        </li>
+                        <li id="collectGoods">
+                            <a href="user/collect/goods.html" target="_blank" class="mpbtn_collect quick-links-a">
+                                <i class="collect"></i>
+                            </a>
+                            <div class="popup">
+                                我的收藏
+                                <i class="arrow-right"></i>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="quick-toggle">
+                    <ul>
+
+                        <li class="quick-area">
+                            <a class="quick-links-a" href="javascript:void(0);">
+                                <i class="customer-service"></i>
+                            </a>
+                            <div class="sidebar-service quick-sidebar">
+                                <i class="arrow-right"></i>
+
+                                <div class="customer-service">
+                                    <a target="_blank" href="#">
+                                        <span class="icon-qq"></span> QQ
+                                    </a>
+                                </div>
+
+                                <div class="customer-service">
+                                    <a target="_blank" href="#">
+                                        <span class="icon-ww"></span> 旺旺
+                                    </a>
+                                </div>
+
+                            </div>
+                        </li>
+
+                        <li class="quick-area">
+                            <a class="quick-links-a" href="javascript:void(0);">
+                                <i class="qr-code"></i>
+                            </a>
+                            <div class="sidebar-code quick-sidebar">
+                                <i class="arrow-right"></i>
+                                <img src="img/test/mall_wx_qrcode_0.jpg">
+                            </div>
+                        </li>
+                        <li class="returnTop" style="display: none;">
+                            <a href="javascript:void(0);" class="return_top quick-links-a">
+                                <i class="top"></i>
+                            </a>
+                            <div class="popup">
+                                返回顶部
+                                <i class="arrow-right"></i>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="">
+                <!--红包 start-->
+                <!--红包 end-->
+                <!--购物车 start-->
+
+                <div class="right-sidebar-panels sidebar-cartbox">
+                    <div class="sidebar-cart-box">
+                        <h3 class="sidebar-panel-header">
+                            <a href="javascript:void(0);" class="title" target="_blank">
+                                <i class="cart-icon"></i>
+                                <em class="title">购物车</em>
+                            </a>
+                            <span class="close-panel"></span>
+                        </h3>
+                        <div class="sidebar-cartbox-goods-list">
+
+                            <div class="cart-panel-main">
+                                <div class="cart-panel-content">
+
+                                    <!-- 没有课程的展示形式 _start -->
+                                    <div class="tip-box">
+                                        <i class="tip-icon"></i>
+                                        <div class="tip-text">
+                                            您的购物车里什么都没有哦
+                                            <br>
+                                            <a class="color" href="" title="再去看看吧" target="_blank">再去看看吧</a>
+                                        </div>
+                                    </div>
+                                    <!-- 没有课程的展示形式 _end-->
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--购物车 end-->
+                <!--浏览历史 start-->
+                <!---->
+                <div class="right-sidebar-panels sidebar-historybox">
+                    <h3 class="sidebar-panel-header">
+                        <a href="javascript:;" class="title">
+                            <i></i>
+                            <em class="title">我的足迹</em>
+                        </a>
+                        <span class="close-panel"></span>
+                    </h3>
+                    <div class="sidebar-panel-main">
+                        <div class="sidebar-panel-content sidebar-historybox-goods-list">
+                            <!---->
+                            <!---->
+                            <!-- 没有浏览历史的展示形式 _start -->
+                            <div class="tip-box">
+                                <i class="tip-icon"></i>
+                                <div class="tip-text">
+                                    您还没有在商城留下任何足迹哦
+                                    <br>
+                                    <a class="color" href="">赶快去看看吧</a>
+                                </div>
+                            </div>
+                            <!-- 没有浏览历史的展示形式 _end-->
+                            <!---->
+                            <!---->
+                        </div>
+                    </div>
+                </div>
+                <!---->
+                <!--浏览历史 end-->
+                <!--对比列表 start-->
+
+                <!--对比列表 start-->
+                <div class="right-sidebar-panels sidebar-comparebox">
+                    <h3 class="sidebar-panel-header">
+                        <a href="javascript:void(0);" class="title">
+                            <i class="compare-icon"></i>
+                            <em class="title">宝贝对比</em>
+                        </a>
+                        <span class="close-panel"></span>
+                    </h3>
+                    <div>
+                        <div class="sidebar-panel-main sidebar-comparebox-goods-list">
+
+                            <div class="sidebar-panel-content compare-panel-content">
+
+                                <!-- 没有对比课程的展示形式 _start -->
+                                <div class="tip-box">
+                                    <i class="tip-icon"></i>
+                                    <div class="tip-text">
+                                        您的对比宝贝什么都没有哦
+                                        <br>
+                                        <a class="color" href="">再去看看吧</a>
+                                    </div>
+                                </div>
+                                <!-- 没有对比课程的展示形式 _end-->
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--对比列表 end-->
+
+                <!--对比列表 end-->
+            </div>
+        </div>
+    </div>
+    <!-- 右侧边栏 _end -->
+
+    <!-- 底部 _start-->
+
+    <div class="site-footer">
+
+
+        <div class="footer-service">
+
+        </div>
+
+
+        <div class="footer-desc-copyright" style="border-top: 1px solid #eeeeee">
+
+            <p class="footer-ecscinfo">
+                <a href="#">首页</a>
+                |
+
+                <a href="#">隐私保护</a>
+                |
+
+                <a href="#">联系我们</a>
+                |
+
+                <a href="#">免责条款</a>
+                |
+
+                <a href="#">公司简介</a>
+                |
+
+                <a href="#">意见反馈</a>
+
+                |
+                <a rel="nofollow" target="_blank" href="#">会员登录</a>
+                |
+                <a rel="nofollow" target="_blank" href="http://bbs.itsource.cn/">会员论坛</a>
+                |
+                <a href="javascript:;" rel="nofollow">客服热线028-86261949</a>
+            </p>
+            <p class="footer-otherlink">
+                <a title="IT商城" target="_blank" href="http://itsource.cn">IT商城</a>
+
+                |
+
+
+                <a title="菁鱼课堂" target="_blank" href="http://127.0.0.1:6002">菁鱼课堂</a>
+
+                |
+
+                <a title="资讯速递" target="_blank" href="http://127.0.0.1:6002">资讯速递</a>
+
+                |
+
+                <a title="快递查询" target="_blank" href="http://m.kuaidi100.com">快递查询</a>
+
+                |
+
+                <a title="论坛" target="_blank" href="http://bbs.xuebay.com/forum.php">会员论坛</a>
+
+                |
+
+                <a title="IT教育咨询有限公司" target="_blank" href="http://127.0.0.1:6002">IT教育咨询有限公司</a>
+
+            </p>
+
+            <p class="footer-beian"> ICP备案证书号:
+                <a rel="nofollow" target="_blank" href="#">蜀ICP备88888888号-1</a>
+                <a rel="nofollow" target="_blank" href="#"><i></i>蜀公网安备 45323525326664号</a>
+            </p>
+            <p class="footer-Copyright">Copyright &copy; 2017
+                <a target="_blank" style="margin:0;padding:0;" href="http://127.0.0.1:6002/">itsource.cn</a> All Rights
+                Reserved. </p>
+            <p>&nbsp;</p>
+
+            <p class="footer-fp-img">
+                <a target="_blank" href="#"><img src="img/test/kxwz.png"></a>
+                <a target="_blank" href="#"><img src="img/test/smyz.png"></a>
+                <a target="_blank" href="#"><img src="img/test/cxyz.jpg"></a>
+                <a target="_blank" href="#"><img src="img/test/hyyz.png"></a>
+                <a target="_blank" href="#"><img src="img/test/jpfw.png"></a>
+            </p>
+        </div>
+
+    </div>
+
+
+</div>
+
+<!-- 第三方流量统计 -->
+<div style="display: none;"></div>
+<!-- 底部 _end-->
+
+<script type="text/javascript" src="js/jquery.fly.min.js"></script>
+<script type="text/javascript" src="js/szy.cart.js"></script>
+<!--[if lte IE 9]>
+<script type="text/javascript" src="/js/requestAnimationFrame.js"></script>
+<![endif]-->
+<script type="text/javascript">
+    $().ready(function () {
+        $.cartbox.count = "0";
+        // 缓载图片
+        $("img").lazyload({
+            skip_invisible: false,
+            effect: 'fadeIn',
+            failure_limit: 20,
+            threshold: 200
+        });
+
+    });
+</script>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: "#myBody",
+        data() {
+            return {
+                queryParams: {
+                    "keyword": null,
+                    "courseTypeId": null,
+                    "gradeName": null,
+                    "chargeName": null,
+                    "priceMin": null,
+                    "priceMax": null,
+                    "sortField": '',
+                    "sortType": "desc",
+                    "page": 1,
+                    "rows": 20
+                },
+                crumbs: [],//面包屑
+                letters: [],
+                datas: {"total:": 0, rows: []},
+                listUrl: "http://127.0.0.1:6002/list.html?courseTypeId=",
+                pages: 1,
+                grades: [],
+                charges: [],
+            }
+        },
+        methods: {
+            search() {
+                //发送请求到后台获取数据
+                var _this = this;
+                this.$http.defaults.baseURL = "http://127.0.0.1:10010/xuebay"
+                this.$http.post("search/course/search", this.queryParams)
+                    .then(res => {
+                        _this.datas = res.data.data;
+                        _this.pages = _this.datas.total % _this.queryParams.rows == 0 ? _this.datas.total / _this.queryParams.rows : parseInt(_this.datas.total / _this.queryParams.rows) + 1;
+                        _this.grades = res.data.data.aggResult.gradeNameTermsAgg;
+                        _this.charges = res.data.data.aggResult.chargeNameTermsAgg;
+                    })
+            },
+            changePage(event) {
+                let el = event.currentTarget;
+                var page = $(el).data("page");
+                this.queryParams.page = page;
+            },
+            changePrice(event) {
+                //点击的按钮元素
+                let el = event.currentTarget;
+
+                $("a[minprice]").css("color", "#666666");
+                $(el).css("color", "red");
+
+                let minPrice = $(el).attr("minPrice");
+                let maxPrice = $(el).attr("maxPrice");
+                this.queryParams.priceMin = minPrice;
+                this.queryParams.priceMax = maxPrice;
+            },
+            changeGrade(event) {
+                //点击的按钮元素
+                let el = event.currentTarget;
+                $("a[gradename]").css("color", "#666666");
+                $(el).css("color", "#ff4341");
+                let gradeName = $(el).attr("gradename");
+                this.queryParams.gradeName = gradeName;
+            },
+            changeCharge(event) {
+                //点击的按钮元素
+                let el = event.currentTarget;
+                $("a[chargeName]").css("color", "#666666");
+                $(el).css("color", "#ff4341");
+                let chargeName = $(el).attr("chargeName");
+                this.queryParams.chargeName = chargeName;
+            },
+            changeSrot(event) {
+                let el = event.currentTarget;
+                let sortField = $(el).attr("sortField");
+                let sortType = $(el).attr("sortType");
+                this.queryParams.sortField = sortField;
+                this.queryParams.sortType = sortType;
+
+                if (sortType === 'desc') {
+                    $(el).attr("sortType", "asc");
+                } else {
+                    $(el).attr("sortType", "desc");
+                }
+            },
+            clearWhere(event) {
+                this.queryParams.sortField = null;
+                this.queryParams.sortType = null;
+                this.queryParams.gradeName = null;
+                this.queryParams.chargeName = null;
+                this.queryParams.priceMin = null;
+                this.queryParams.priceMax = null;
+
+                $("a[minprice]").css("color", "#666666");
+                $("a[gradeName]").css("color", "#666666");
+                $("a[chargeName]").css("color", "#666666");
+            }
+        },
+        watch: {
+            queryParams: {
+                handler(currentVal, oldVal) { //queryParams变化了
+                    this.search();
+                },
+                deep: true
+            }
+        }
+        ,
+        mounted() {
+            //获取路径中值赋值给keyword,keyword在做一个双向绑定
+            //http://127.0.0.1:6002/list.html?    courseTypeId,102
+            //http://127.0.0.1:6002/list.html?    keyword,java
+            let url = location.href;
+            url = url.substr(url.indexOf("?") + 1);   //courseTypeId=102    ;  keyword=java
+            var tmps = url.split("="); //[producttype,102]   ; [keyword,java]
+            var paramName = tmps[0]; // courseTypeId  ;  keyword
+            var paramValue = tmps[1];	//102        ;  java
+
+            //动态属性
+            //this.queryParams["courseTypeId"] = window.decodeURI(102);
+
+            this.queryParams[paramName] = window.decodeURI(paramValue);
+
+            //判断是否是以类型过来,如果是需要查询面包屑和品牌
+            let courseTypeId = this.queryParams.courseTypeId;
+            // if(courseTypeId){
+            //     //对面包屑和品牌进行赋值. 参数都是类型
+            // 	this.$http.defaults.baseURL = "http://127.0.0.1:10010/xuebay"
+            // 	this.$http.get("/course/courseType/crumbs/"+courseTypeId)
+            // 		.then(res=>{
+            // 		    this.crumbs = res.data.data;
+            // 			setTimeout(function () {
+            //                 $('.breadcrumb .crumbs-nav').hover(function() {
+            //                     $(this).toggleClass('curr');
+            //                 })
+            //             },100);
+            // 		})
+            // }
+            //处理完参数需要查询
+            //this.search();
+        }
+    });
+</script>
+</body>
+<style>
+    .list-grid .item {
+        width: 228px;
+    }
+
+    .list-grid .item-pic img {
+        width: 220px;
+        height: 160px;
+    }
+
+    .list-grid .item-pic {
+        width: 225px;
+        height: 160px;
+        text-align: center;
+    }
+
+    .list-grid .item-con-info {
+        height: 25px;
+    }
+</style>
+</html>
