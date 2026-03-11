@@ -2,7 +2,7 @@
 
 # Nacos 快速开始
 
-快速开始帮助你快速在下载、按照并使用 Nacos 。当前产出的 Nacos 服务为 2.5.2 版本的`单机模式`并且`开启鉴权`。
+快速开始帮助你快速在下载、安装并使用 Nacos 。当前产出的 Nacos 服务为 2.5.2 版本的`单机模式`并且`开启鉴权`。
 
 ## Nacos 下载
 
@@ -14,14 +14,15 @@
 
 ```shell
 # 解压 nacos-server-2.5.2.zip
-unzip nacos-server-$version.zip
+unzip nacos-server-2.5.2.zip
 # 解压 nacos-server-2.5.2.tar.gz
-tar -xvf nacos-server-$version.tar.gz
+tar -xvf nacos-server-2.5.2.tar.gz
 
 ```
 ## 启用 Nacos 鉴权
 [鉴权配置请参考官网-点我直达](https://nacos.io/docs/v2/guide/user/auth/)
 - Mac
+
 ```shell
 cd ${nacos.home}
 FILE_PATH="conf/application.properties"
