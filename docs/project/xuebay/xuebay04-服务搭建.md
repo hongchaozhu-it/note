@@ -8,7 +8,6 @@
 - xuebay/xuebay-basic/xuebay-basic-dependency/xuebay-basic-web-dependency/pom.xml
 
 ```xml
-
 <dependencies>
     <!-- web -->
     <dependency>
@@ -37,7 +36,6 @@
 - xuebay/xuebay-basic/xuebay-basic-dependency/xuebay-basic-mybatisplus-dependency/pom.xml
 
 ```xml
-
 <dependencies>
     <!-- mybatis-plus -->
     <dependency>
@@ -68,7 +66,6 @@
 `xuebay-basic-web-dependency` 即可。
 
 ```xml
-
 <dependencies>
     <dependency>
         <groupId>com.zhc</groupId>

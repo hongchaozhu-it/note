@@ -5,7 +5,6 @@
 [`注意`] 一定不能导入spring-boot-start-web包，会和gateway冲突
 
 ```xml
-
 <dependencies>
     <!-- 基础启动器 -->
     <dependency>
