@@ -48,9 +48,12 @@
             renderer: {
                 code: function (code, lang) {
                     if (lang === "mermaid") {
-                        return (
-                            '<div class="mermaid">' + mermaid.render('mermaid-svg-' + num++, code) + "</div>"
-                        );
+                        var id = "mermaid-svg-" + num++;
+                        mermaid.render(id, code).then(function (res) {
+                            var el = document.getElementById(id);
+                            if (el) el.innerHTML = res.svg;
+                        });
+                        return '<div class="mermaid" id="' + id + '">渲染中...</div>';
                     }
                     return this.origin.code.apply(this, arguments);
                 }
