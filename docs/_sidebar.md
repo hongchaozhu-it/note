@@ -10,3 +10,4 @@
         * [集成MybatisPlus](project/xuebay/xuebay05-集成MybatisPlus.md)
         * [集成Swagger](project/xuebay/xuebay06-集成Swagger.md)
         * [启动后台前端](project/xuebay/xuebay07-启动后台前端.md)
+        * [全局异常处理](project/xuebay/xuebay08-全局异常处理.md)
