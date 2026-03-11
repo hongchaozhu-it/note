@@ -7,3 +7,4 @@
         * [项目后端搭建](./project/xuebay/xuebay02-项目后端搭建.md)
         * [集成Gateway网关](./project/xuebay/xuebay03-集成Gateway网关.md)
         * [服务搭建](./project/xuebay/xuebay04-服务搭建.md)
+        * [集成MybatisPlus](./project/xuebay/xuebay05-集成MybatisPlus.md)
