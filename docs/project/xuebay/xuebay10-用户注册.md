@@ -209,7 +209,7 @@ sequenceDiagram
     Client->>Gateway: POST /xuebay/user/user/register
     Gateway->>UserService: 路由转发
     
-    Note over UserService: @GlobalTransactional 开启分布式事务
+    Note over UserService: 开启分布式事务 GlobalTransactional
     
     rect rgb(240, 248, 255)
         Note right of UserService: 步骤1: 验证短信验证码
