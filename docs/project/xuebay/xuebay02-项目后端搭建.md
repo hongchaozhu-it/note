@@ -9,20 +9,20 @@
 | 服务名称                       | 端口号     | 功能描述     | 核心分类  |
 |----------------------------|---------|----------|-------|
 | **xuebay-gateway-service** | `10010` | 服务网关     | 基础设施  |
-| **xuebay-uaa-service**     | `10040` | 认证授权服务   | 安全/认证 |
 | **xuebay-system-service**  | `10020` | 系统管理服务   | 系统管理  |
 | **xuebay-user-service**    | `10030` | 用户中心服务   | 核心业务  |
+| **xuebay-uaa-service**     | `10040` | 认证授权服务   | 安全/认证 |
 | **xuebay-course-service**  | `10050` | 课程内容服务   | 核心业务  |
-| **xuebay-order-service**   | `10100` | 订单处理服务   | 交易业务  |
-| **xuebay-pay-service**     | `10110` | 支付平台服务   | 交易业务  |
-| **xuebay-cart-service**    | `10140` | 购物车服务    | 交易业务  |
-| **xuebay-kill-service**    | `10120` | 秒杀/限时购服务 | 促销业务  |
-| **xuebay-search-service**  | `10080` | 全文搜索服务   | 功能支撑  |
-| **xuebay-message-service** | `10090` | 消息通知服务   | 功能支撑  |
 | **xuebay-file-service**    | `10060` | 资源文件服务   | 资源管理  |
 | **xuebay-media-service**   | `10070` | 视频/多媒体服务 | 资源管理  |
-| **xuebay-xxljob-service**  | `10150` | 分布式定时任务  | 任务调度  |
+| **xuebay-search-service**  | `10080` | 全文搜索服务   | 功能支撑  |
+| **xuebay-message-service** | `10090` | 消息通知服务   | 功能支撑  |
+| **xuebay-order-service**   | `10100` | 订单处理服务   | 交易业务  |
+| **xuebay-pay-service**     | `10110` | 支付平台服务   | 交易业务  |
+| **xuebay-kill-service**    | `10120` | 秒杀/限时购服务 | 促销业务  |
+| **xuebay-cart-service**    | `10140` | 购物车服务    | 交易业务  |
 | **xuebay-common-service**  | `10130` | 公共基础服务   | 基础设施  |
+| **xuebay-xxljob-service**  | `10150` | 分布式定时任务  | 任务调度  |
 
 ---
 
