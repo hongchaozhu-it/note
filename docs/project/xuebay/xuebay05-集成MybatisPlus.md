@@ -327,6 +327,7 @@ jdbc.pwd=${your-mysql-server-password}
 ### 模板文件
 
 - resources/templates/controller.java.vm
+
 ```java
 package ${package.Controller};
 
